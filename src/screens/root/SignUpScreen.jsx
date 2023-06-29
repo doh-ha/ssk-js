@@ -3,10 +3,11 @@ import styled from "styled-components/native";
 
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
-import ProgressButton from "../../components/signUp/ProgressButton";
+import SignUpTitle from "../../components/signUp/SignUpTitle";
 import RolePage from "../../pages/signUp/RolePage";
 import BasicInfoPage from "../../pages/signUp/BasicInfoPage";
 import CompletePage from "../../pages/signUp/CompletePage";
+import ProgressButton from "../../components/signUp/ProgressButton";
 
 const SignUpScreen = () => {
   const [role, setRole] = useState("Tutor");
@@ -19,10 +20,15 @@ const SignUpScreen = () => {
   switch(page) {
     case "RolePage":
       pageComponent = (
-        <RolePage
-          role={role}
-          setRole={setRole}
-        />
+        <>
+          <SignUpTitle>
+            1. 로그인 정보 기입하기
+          </SignUpTitle>
+          <RolePage
+            role={role}
+            setRole={setRole}
+          />
+        </>
       )
       break;
     case "BasicInfoPage":
