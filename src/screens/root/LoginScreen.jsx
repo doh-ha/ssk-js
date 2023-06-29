@@ -4,14 +4,21 @@ import { View, Text } from "react-native";
 
 import Layout from "../../components/common/Layout";
 import PageWrapper from "../../components/common/PageWrapper";
-import Header from "../../components/common/Header";
+import Margin from "../../components/common/Margin";
+import LoginLogo from "../../components/login/LoginLogo";
+import LoginForm from "../../components/login/LoginForm";
+import LoginOptions from "../../components/login/LoginOptions";
 
 const LoginScreen = () => {
   return (
     <>
       <Layout>
         <PageWrapper>
-          <Header text="로그인" type="basic"/>
+          <Margin size={130}/>
+          <LoginLogo />
+          <Margin size={40}/>
+          <LoginForm />
+          <LoginOptions />
         </PageWrapper>
       </Layout>
     </>
