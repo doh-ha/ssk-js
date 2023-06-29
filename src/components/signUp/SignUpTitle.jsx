@@ -20,11 +20,12 @@ const TitleContainer = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  padding: 0 30px;
 `;
 
 const TitleText = styled.Text`
   color: #818181;
-  font-size: 30px;  
+  font-size: 24px;  
   font-family: "ExtraBold";
   line-height: 45px;
 `;
