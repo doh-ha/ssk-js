@@ -12,9 +12,6 @@ const RolePage = ({ role, setRole }) => {
 
   return (
     <Wrapper>
-      <DescText>
-        1. 가입 유형을 선택해주세요.
-      </DescText>
       <ButtonContainer
         onPress={handleTutorButton}                
         style={{
