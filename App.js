@@ -8,11 +8,11 @@ import RootNavigator from "./src/navigators/RootNavigator";
 export default function App () {
 
   Font.loadAsync({
-    Light: require("./src/global/fonts/NanumSquareL.ttf"),
-    Regular: require("./src/global/fonts/NanumSquareR.ttf"),
-    Medium: require("./src/global/fonts/NanumSquare.ttf"),
-    Bold: require("./src/global/fonts/NanumSquareB.ttf"),
-    ExtraBold: require("./src/global/fonts/NanumSquareEB.ttf"),
+    Light: require("./src/assets/fonts/NanumSquareL.ttf"),
+    Regular: require("./src/assets/fonts/NanumSquareR.ttf"),
+    Medium: require("./src/assets/fonts/NanumSquare.ttf"),
+    Bold: require("./src/assets/fonts/NanumSquareB.ttf"),
+    ExtraBold: require("./src/assets/fonts/NanumSquareEB.ttf"),
   });
 
   return (
