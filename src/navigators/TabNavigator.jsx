@@ -2,10 +2,13 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, FontAwesome5 } from "@expo/vector-icons";
 
+import color from "../common/color";
+
 import HomeScreen from "../screens/tab/HomeScreen";
 import ClassListScreen from "../screens/tab/ClassListScreen";
 import MyPageScreen from "../screens/tab/MyPageScreen";
-import color from "../common/color";
+
+import HomeNavigator from "./HomeNavigator";
 
 const TabBar = createBottomTabNavigator();
 
@@ -42,7 +45,7 @@ const TabNavigator = () => {
       />
       <TabBar.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeNavigator}
         options={{
           headerShown: false,
           tabBarLabel: "홈",
@@ -64,7 +67,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <FontAwesome5
               name="user-alt"
-              size={25}
+              size={24}
               color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON}
             />
           ),
