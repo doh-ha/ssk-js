@@ -2,8 +2,10 @@ import React, {useState} from "react";
 import styled from "styled-components/native";
 
 import Layout from "../../components/common/Layout";
+import Margin from "../../components/common/Margin";
 import Header from "../../components/common/Header";
 import SignUpTitle from "../../components/signUp/SignUpTitle";
+import SignUpProgressCircle from "../../components/signUp/SignUpProgressCircle";
 import RolePage from "../../pages/signUp/RolePage";
 import BasicInfoPage from "../../pages/signUp/BasicInfoPage";
 import CompletePage from "../../pages/signUp/CompletePage";
@@ -22,7 +24,7 @@ const SignUpScreen = () => {
       pageComponent = (
         <>
           <SignUpTitle>
-            1. 로그인 정보 기입하기
+            1. 가입 유형 선택하기
           </SignUpTitle>
           <RolePage
             role={role}
@@ -33,14 +35,19 @@ const SignUpScreen = () => {
       break;
     case "BasicInfoPage":
       pageComponent = (
-        <BasicInfoPage
-          email={email}
-          password={password}
-          name={name}
-          setEmail={setEmail}
-          setPassword={setPassword}
-          setName={setName}
-        />
+        <>
+          <SignUpTitle>
+            2. 로그인 정보 기입하기
+          </SignUpTitle>
+          <BasicInfoPage
+            email={email}
+            password={password}
+            name={name}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            setName={setName}
+          />
+        </>
       )
       break;
     case "CompletePage":
@@ -55,6 +62,9 @@ const SignUpScreen = () => {
   return (
     <Layout>
       <Header text="회원가입" type="withBack"/>
+      <Margin size={30} />
+      <SignUpProgressCircle />
+      <Margin size={10} />
       <ComponentWrapper>
         {pageComponent}
       </ComponentWrapper>

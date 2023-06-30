@@ -5,6 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 const LoginOptions = () => {
   const navigation = useNavigation();
 
+  const handleTempButton = () => {
+    navigation.navigate("TabNavigator");
+  }
+
   const handleSignUpButton = () => {
     navigation.navigate("SignUpScreen");
   }
@@ -12,12 +16,16 @@ const LoginOptions = () => {
   return (
     <Wrapper>
       <OptionSection>      
-        <Button>
+        <Button
+          onPress={handleTempButton}
+        >
           <OptionText>
             아이디 찾기
           </OptionText>
         </Button>
-        <Button>
+        <Button
+          onPress={handleTempButton}
+        >
           <OptionText>
             비밀번호 찾기
           </OptionText>
