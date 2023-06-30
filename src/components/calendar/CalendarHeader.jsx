@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components/native";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import color from "../../common/color";
 
+import BottomSheet from "../common/BottomSheet";
+
 const size = 24;
 
 const CalendarHeader = ({ selectedMonth, selectedYear, handleMoveMonth }) => {
+  const ref = useRef();
+
+  const handlePressText = () => {
+    ref?.current?.open();
+  };
+
   return (
     <Container>
       <Button onPress={handleMoveMonth.bind(this, -1)}>
@@ -17,7 +25,7 @@ const CalendarHeader = ({ selectedMonth, selectedYear, handleMoveMonth }) => {
           color={color.COLOR_MAIN}
         />
       </Button>
-      <HeaderText>
+      <HeaderText onPress={handlePressText}>
         {selectedYear}년 {selectedMonth.toString().padStart(2, "0")}월
       </HeaderText>
       <Button onPress={handleMoveMonth.bind(this, 1)}>
@@ -27,6 +35,21 @@ const CalendarHeader = ({ selectedMonth, selectedYear, handleMoveMonth }) => {
           color={color.COLOR_MAIN}
         />
       </Button>
+
+      <BottomSheet rbRef={ref} heightPercentage={0.3}>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+        <HeaderText>hello</HeaderText>
+      </BottomSheet>
     </Container>
   );
 };
