@@ -49,6 +49,7 @@ const CalendarDatePicker = ({
   setShowPicker,
   handlePickDate,
 }) => {
+  // 플롯픔 === ios 일 때 사용할 states
   const [date, setDate] = useState(selectedDate);
   const [isConfirmed, setIsConfirmed] = useState(false);
 

@@ -13,12 +13,18 @@ const Calendar = () => {
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
 
+  // 선택한 날짜
   const [selectedDate, setSelectedDate] = useState(today);
+  // 선택한 월
   const [selectedMonth, setSelectedMonth] = useState(month);
+  // 선택한 년
   const [selectedYear, setSelectedYear] = useState(year);
 
+  // date picker 보여짐 여부
   const [showPicker, setShowPicker] = useState(false);
 
+  // 헤더 chevron 아이콘 클릭 시 실행되는 이벤트 함수
+  // 월 이동
   // dir = -1: 이전달, 1: 다음달
   const handleMoveMonth = (dir) => {
     if (selectedMonth === 1 && dir === -1) {
@@ -32,20 +38,24 @@ const Calendar = () => {
     }
   };
 
+  // 날짜 타일 클릭 시 실행되는 이벤트 함수
   const handlePressDate = (date) => {
     setSelectedDate(date);
   };
 
+  // today 버튼 클릭 시 실행되는 이벤트 함수
   const handlePressToday = () => {
     setSelectedDate(today);
     setSelectedMonth(month);
     setSelectedYear(year);
   };
 
+  // 헤더 글씨 클릭 시 실행되는 이벤트 함수
   const handleToggleShowPicker = () => {
     setShowPicker(!showPicker);
   };
 
+  // date picker 에서 날짜 선택 시 실행되는 이벤트 함수
   const handlePickDate = (date) => {
     setShowPicker(false);
 
@@ -59,15 +69,20 @@ const Calendar = () => {
 
   return (
     <Container>
+      {/* 년 & 월 보여주는 캘린더 헤더 */}
       <CalendarHeader
         selectedMonth={selectedMonth}
         selectedYear={selectedYear}
         handleMoveMonth={handleMoveMonth}
         handleToggleShowPicker={handleToggleShowPicker}
       />
+
+      {/* 오늘 날짜로 이동하는 버튼 */}
       <TodayButton onPress={handlePressToday}>
         <TodayText>today</TodayText>
       </TodayButton>
+
+      {/* 캘린더 바디 */}
       <CalendarBody
         selectedDate={selectedDate}
         selectedMonth={selectedMonth}
@@ -76,6 +91,7 @@ const Calendar = () => {
         handleMoveMonth={handleMoveMonth}
       />
 
+      {/* 캘린더 Date Picker 컴포넌트 */}
       {showPicker && (
         <CalendarDatePicker
           setShowPicker={setShowPicker}
