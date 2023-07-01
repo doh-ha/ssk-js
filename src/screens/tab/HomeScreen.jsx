@@ -5,9 +5,11 @@ import Calendar from "../../components/calendar/Calendar";
 
 const HomeScreen = () => {
   return (
-    <MainLayout headerText={"홈"} headerType={"basic"}>
-      <Calendar />
-    </MainLayout>
+    <>
+      <MainLayout headerText={"홈"} headerType={"basic"}>
+        <Calendar />
+      </MainLayout>
+    </>
   );
 };
 

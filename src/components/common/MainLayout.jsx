@@ -10,10 +10,9 @@ const MainLayout = ({ children, headerText, headerType }) => {
   return (
     <Wrapper>
       <Header text={headerText} type={headerType} />
-      {/* <Inner>
+      <Inner>
         <Contents>{children}</Contents>
-      </Inner> */}
-      <Contents>{children}</Contents>
+      </Inner>
     </Wrapper>
   );
 };
@@ -35,6 +34,5 @@ const Inner = styled.ScrollView`
 const Contents = styled.View`
   width: 100%;
   flex: 1;
-  position: relative;
   background-color: ${color.COLOR_GRAY_BACKGROUND};
 `;

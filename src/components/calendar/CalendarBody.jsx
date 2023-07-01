@@ -6,6 +6,7 @@ import color from "../../common/color";
 import { CalendarStates, Days } from "../../constants/calendar";
 import { compareDates, dateFormat, getTotalDays } from "../../utils/date";
 
+// 요일(월, 화, 수, 목, 금, 토, 일) 컴포넌트
 const CalendarDays = () => {
   const renderItem = ({ item }) => {
     return (
@@ -32,6 +33,9 @@ const CalendarBody = ({
   handlePressDate,
 }) => {
   const today = new Date();
+  // 현재 월의 모든 날짜 보여주기 위한 배열 state
+  // 이전 달의 마지막 n 개의 날짜 + 현재 달 날짜 + 다음 달 처음 m 개의 날짜
+  // 각 날짜는 { state, num, date } 로 이루어져 있음
   const [totalDays, setTotalDays] = useState([]);
 
   useEffect(() => {
@@ -39,6 +43,7 @@ const CalendarBody = ({
     setTotalDays(days);
   }, [selectedMonth, selectedYear]);
 
+  // 날짜 타일 렌더링 아이템
   const renderItem = ({ item }) => {
     return (
       <CalendarDay

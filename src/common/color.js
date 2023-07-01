@@ -16,4 +16,6 @@ export default {
   COLOR_CALENDAR_TODAY: "#E1E1E1",
 
   COLOR_BSHEET_BACKGROUND: "rgba(107, 107, 107, 0.25)",
+
+  COLOR_GRAY_BUTTON: "#B0B0B0",
 };
