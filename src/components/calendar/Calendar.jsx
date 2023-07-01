@@ -5,6 +5,7 @@ import color from "../../common/color";
 
 import CalendarHeader from "./CalendarHeader";
 import CalendarBody from "./CalendarBody";
+import CalendarDatePicker from "./CalendarDatePicker";
 
 const Calendar = () => {
   const today = new Date();
@@ -15,6 +16,8 @@ const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedMonth, setSelectedMonth] = useState(month);
   const [selectedYear, setSelectedYear] = useState(year);
+
+  const [showPicker, setShowPicker] = useState(false);
 
   // dir = -1: 이전달, 1: 다음달
   const handleMoveMonth = (dir) => {
@@ -39,12 +42,28 @@ const Calendar = () => {
     setSelectedYear(year);
   };
 
+  const handleToggleShowPicker = () => {
+    setShowPicker(!showPicker);
+  };
+
+  const handlePickDate = (date) => {
+    setShowPicker(false);
+
+    setSelectedDate(date);
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    setSelectedMonth(month);
+    setSelectedYear(year);
+  };
+
   return (
     <Container>
       <CalendarHeader
         selectedMonth={selectedMonth}
         selectedYear={selectedYear}
         handleMoveMonth={handleMoveMonth}
+        handleToggleShowPicker={handleToggleShowPicker}
       />
       <TodayButton onPress={handlePressToday}>
         <TodayText>today</TodayText>
@@ -56,6 +75,14 @@ const Calendar = () => {
         handlePressDate={handlePressDate}
         handleMoveMonth={handleMoveMonth}
       />
+
+      {showPicker && (
+        <CalendarDatePicker
+          setShowPicker={setShowPicker}
+          selectedDate={selectedDate}
+          handlePickDate={handlePickDate}
+        />
+      )}
     </Container>
   );
 };
