@@ -2,7 +2,7 @@ import moment from "moment";
 import { CalendarStates } from "../constants/calendar";
 
 export const dateFormat = (date) => {
-  return moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY년 MM월 DD일");
 };
 
 export const compareDates = (date1, date2) => {
