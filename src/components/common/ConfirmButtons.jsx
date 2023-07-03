@@ -3,6 +3,10 @@ import React from "react";
 import styled from "styled-components/native";
 import color from "../../common/color";
 
+import { Dimensions } from "react-native";
+
+const windowWidth = Dimensions.get("window").width;
+
 const ConfirmButtons = ({
   confirmText,
   buttonColor,
@@ -30,12 +34,12 @@ const Container = styled.View`
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: ${windowWidth};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 20;
-  padding-horizontal: 10;
+  padding-horizontal: 20;
 `;
 
 const Button = styled.Pressable`

@@ -40,6 +40,9 @@ const BottomSheet = ({
             style={{
               paddingBottom: windowHeight * 0.07,
               height: "100%",
+              width: "100%",
+              justifyContent: "center",
+              paddingHorizontal: 20,
             }}
             activeOpacity={1}
           >
@@ -54,8 +57,6 @@ const BottomSheet = ({
 export default BottomSheet;
 
 const Contents = styled.ScrollView`
-  // background-color: whitesmoke;
   height: 100%;
-  padding-horizontal: 20;
   padding-vertical: 10;
 `;
