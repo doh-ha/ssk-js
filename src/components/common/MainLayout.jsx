@@ -35,4 +35,5 @@ const Contents = styled.View`
   width: 100%;
   flex: 1;
   background-color: ${color.COLOR_GRAY_BACKGROUND};
+  padding-bottom: 100;
 `;

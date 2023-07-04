@@ -22,4 +22,5 @@ export default {
   COLOR_GRAY_ICON: "#BBBBBB",
 
   COLOR_GRAY_BORDER: "#D9D9D9",
+  COLOR_LAVENDER: "#B394F6",
 };
