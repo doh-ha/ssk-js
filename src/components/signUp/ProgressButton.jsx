@@ -71,7 +71,7 @@ const ProgressButton = ({ page, email, password, name, role, setPage }) => {
           await createForm();
           setPage("CompletePage");
         } else {
-          Toast.show({type: "info", text1: "가입 정보를 모두 입력해주세요."});
+          Toast.show({type: "error", text1: "모든 정보를 기입해주세요."});
         };
       };
       handleBackButton = () => {
@@ -134,6 +134,7 @@ const ProgressButton = ({ page, email, password, name, role, setPage }) => {
       <Toast
         position="bottom"
         bottomOffset={60}
+        visibilityTime={1200}
       />
       <Wrapper>
         {component}
