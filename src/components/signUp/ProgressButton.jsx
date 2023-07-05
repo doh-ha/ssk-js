@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import styled from "styled-components/native";
+import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons'; 
 
@@ -70,7 +71,7 @@ const ProgressButton = ({ page, email, password, name, role, setPage }) => {
           await createForm();
           setPage("CompletePage");
         } else {
-          console.log("이메일, 비밀번호, 이름을 모두 입력해주세요.");
+          Toast.show({type: "info", text1: "가입 정보를 모두 입력해주세요."});
         };
       };
       handleBackButton = () => {
@@ -129,9 +130,15 @@ const ProgressButton = ({ page, email, password, name, role, setPage }) => {
   }
 
   return (
-    <Wrapper>
-      {component}
-    </Wrapper>
+    <>
+      <Toast
+        position="bottom"
+        bottomOffset={60}
+      />
+      <Wrapper>
+        {component}
+      </Wrapper>
+    </>
   );
 };
 

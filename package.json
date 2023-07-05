@@ -33,6 +33,7 @@
     "react-native-root-toast": "^3.4.1",
     "react-native-safe-area-context": "^4.6.3",
     "react-native-screens": "^3.22.0",
+    "react-native-toast-message": "v2",
     "react-native-web": "~0.18.10",
     "styled-components": "^5.1.26",
     "zustand": "^4.3.8"
