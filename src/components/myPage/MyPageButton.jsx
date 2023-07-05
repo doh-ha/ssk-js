@@ -6,7 +6,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import color from "../../common/color";
 import ProfileImage from "../common/ProfileImage";
 
-const MyPageButton = ({path, nickname, type}) => {
+const MyPageButton = ({nickname, type, handleButton }) => {
 
   let component;
   switch (type) {
@@ -56,7 +56,7 @@ const MyPageButton = ({path, nickname, type}) => {
   }
 
   return (
-    <ButtonContainer>
+    <ButtonContainer styled={{ activeOpacity: 0.8 }} onPress={handleButton}>
       {component}
     </ButtonContainer>
   );
@@ -72,6 +72,7 @@ const ButtonContainer = styled.TouchableOpacity`
   justify-content: space-between;
   align-items: center;
   padding: 12px 22px;
+  background-color: #fff;
   border-bottom-width: 1px;
   border-bottom-color: ${color.COLOR_GRAY_LINE}
 `;
