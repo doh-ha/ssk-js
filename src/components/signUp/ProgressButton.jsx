@@ -65,9 +65,13 @@ const ProgressButton = ({ page, email, password, name, role, setPage }) => {
       break;
     case "BasicInfoPage":
       handleButton = async () => {
-        await addForm({email, password, name});
-        await createForm();
-        setPage("CompletePage");
+        if (email && password && name) {
+          await addForm({email, password, name});
+          await createForm();
+          setPage("CompletePage");
+        } else {
+          console.log("이메일, 비밀번호, 이름을 모두 입력해주세요.");
+        };
       };
       handleBackButton = () => {
         setPage("RolePage");

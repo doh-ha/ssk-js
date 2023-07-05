@@ -63,7 +63,7 @@ const SignUpScreen = () => {
     <Layout>
       <Header text="회원가입" type="withBack"/>
       <Margin size={30} />
-      <SignUpProgressCircle />
+      <SignUpProgressCircle page={page}/>
       <Margin size={10} />
       <ComponentWrapper>
         {pageComponent}
