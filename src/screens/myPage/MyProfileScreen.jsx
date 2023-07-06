@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 
 import color from "../../common/color";
@@ -9,6 +9,8 @@ import ProfileInfo from "../../components/myPage/ProfileInfo";
 import ImageUpdateButton from "../../components/myPage/ImageUpdateButton";
 
 const MyProfileScreen = () => {
+  const [ profileImage, setProfileImage ] = useState(null);
+
   return (
     <WhiteLayout headerText={"내 정보"} headerType={"back"}>
       <ProfileImageWrapper>
