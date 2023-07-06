@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import styled from "styled-components/native";
 import color from "../../common/color";
@@ -9,6 +10,12 @@ import ClassList from "../../components/common/ClassList";
 import CircleIconButton from "../../components/common/CircleIconButton";
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  const navigateToCreateClass = () => {
+    navigation.navigate("CreateClassScreen");
+  }
+
   return (
     <>
       <MainLayout headerText={"홈"} headerType={"basic"}>
@@ -21,7 +28,7 @@ const HomeScreen = () => {
         </TodayClassView>
       </MainLayout>
 
-      <CircleIconButton name="plus" />
+      <CircleIconButton name="plus" onPress={navigateToCreateClass}/>
     </>
   );
 };
