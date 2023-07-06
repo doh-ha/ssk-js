@@ -9,13 +9,13 @@ import ProfileInfo from "../../components/myPage/ProfileInfo";
 import ImageUpdateButton from "../../components/myPage/ImageUpdateButton";
 
 const MyProfileScreen = () => {
-  const [ profileImage, setProfileImage ] = useState(null);
+  const [ image, setImage ] = useState(null);
 
   return (
     <WhiteLayout headerText={"내 정보"} headerType={"back"}>
       <ProfileImageWrapper>
-        <ProfileImage size={120} />
-        <ImageUpdateButton />
+        <ProfileImage size={120} image={image} />
+        <ImageUpdateButton setImage={setImage}/>
         <DefaultImageButton>
           <DefaultImageText>기본 이미지로 변경</DefaultImageText>
         </DefaultImageButton>
