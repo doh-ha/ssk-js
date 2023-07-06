@@ -30,7 +30,7 @@ const ProgressButton = ({ page, email, password, name, role, setPage }) => {
       console.log("response: ", response)
     } catch (error) {
       console.log("error: ", error);
-    }
+    };
   };
 
   let component;
