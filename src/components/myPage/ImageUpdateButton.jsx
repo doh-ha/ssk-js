@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components/native";
 
 import color from "../../common/color";
+import { pickImage } from "../../constants/imagePicker";
 
-const ImageUpdateButton = ({ updateImage }) => {
+const ImageUpdateButton = ({ setImage }) => {
 
   const handleButton = () => {
-    updateImage;
+    pickImage({setImage});
   };
 
   return (

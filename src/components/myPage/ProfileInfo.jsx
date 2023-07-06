@@ -1,16 +1,24 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components/native";
 
 import color from "../../common/color";
+import { getData } from "../../constants/asyncStorage";
 
-const ProfileInfo = ({ headerText, contentText }) => {
+const ProfileInfo = ({ headerText, contentText, setIsOpened }) => {
+
+  const handleButton = () => {
+    setIsOpened(true);
+  }
 
   return (
     <Wrapper>
       <Header>{headerText}</Header>
       <ContentContainer>
         <ContentText>{contentText}</ContentText>
-        { headerText === "이름" ? <ChangeButton><ButtonText>이름 변경하기</ButtonText></ChangeButton> 
+        { headerText === "이름" ? <ChangeButton onPress={handleButton}>
+          <ButtonText>이름 변경하기</ButtonText>
+        </ChangeButton> 
         : <></>}
       </ContentContainer>
     </Wrapper>

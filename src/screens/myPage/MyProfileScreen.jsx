@@ -1,29 +1,91 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 
 import color from "../../common/color";
+import { getData } from "../../constants/asyncStorage";
 
 import WhiteLayout from "../../components/common/WhiteLayout";
 import ProfileImage from "../../components/common/ProfileImage";
 import ProfileInfo from "../../components/myPage/ProfileInfo";
 import ImageUpdateButton from "../../components/myPage/ImageUpdateButton";
+import ConfirmModal from "../../components/common/ConfirmModal";
 
 const MyProfileScreen = () => {
+  const [ isOpened, setIsOpened ] = useState(false);
+  const [ image, setImage ] = useState(null);
+  const [ nickName, setNickName ] = useState("");
+  const [ role, setRole ] = useState("");
+  const [ email, setEmail ] = useState("eagle625@naver.com");
+  const [ newName, setNewName ] = useState("");
+
+  const updateNickName = async () => {
+    try {
+      const token = await getData("access-token");
+      const data = {name: newName};
+      console.log("보내기 전: ", data);
+      const response = await axios.put("http://ec2-43-201-71-214.ap-northeast-2.compute.amazonaws.com/api/user/update", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+    } catch (error) {
+      console.log("error: ", error);
+    } 
+  }
+
+  const fetchUserInfo = async () => {
+    try {
+      const token = await getData("access-token");
+      const response = await axios.get("http://ec2-43-201-71-214.ap-northeast-2.compute.amazonaws.com/api/user/detail", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log("error: ", error);
+    };
+  };
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const userInfo = await fetchUserInfo();
+      console.log(userInfo);
+      setNickName(userInfo.name);
+      setRole(userInfo.role);
+    };
+
+    fetchData();
+  }, [isOpened]);
+
   return (
-    <WhiteLayout headerText={"내 정보"} headerType={"back"}>
-      <ProfileImageWrapper>
-        <ProfileImage size={120} />
-        <ImageUpdateButton />
-        <DefaultImageButton>
-          <DefaultImageText>기본 이미지로 변경</DefaultImageText>
-        </DefaultImageButton>
-      </ProfileImageWrapper>
-      <ContentWrapper>
-        <ProfileInfo headerText="이름" contentText="김철수"/>
-        <ProfileInfo headerText="Tutor/Tutee" contentText="학생"/>
-        <ProfileInfo headerText="이메일" contentText="cheolsu@naver.com"/>
-      </ContentWrapper>
-    </WhiteLayout>
+    <>
+      <WhiteLayout headerText={"내 정보"} headerType={"back"}>
+        <ProfileImageWrapper>
+          <ProfileImage size={120} image={image} />
+          <ImageUpdateButton setImage={setImage} />
+          <DefaultImageButton>
+            <DefaultImageText>기본 이미지로 변경</DefaultImageText>
+          </DefaultImageButton>
+        </ProfileImageWrapper>
+        <ContentWrapper>
+          <ProfileInfo headerText="이름" contentText={nickName} setIsOpened={setIsOpened} />
+          <ProfileInfo headerText="Tutor/Tutee" contentText={role} />
+          <ProfileInfo headerText="이메일" contentText={email} />
+        </ContentWrapper>
+      </WhiteLayout>
+      { isOpened && <ConfirmModal 
+        modalText="변경할 이름을 입력해주세요."
+        confirmText="변경하기"
+        cancelText="취소하기"
+        onCancel={() => setIsOpened(false)}
+        onConfirm={updateNickName}
+        newValue={newName}
+        setNewValue={setNewName}
+      />}
+    </>
   );
 };
 

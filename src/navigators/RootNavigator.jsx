@@ -9,7 +9,7 @@ import TabNavigator from "./TabNavigator";
 const Stack = createNativeStackNavigator(); // Stack 네비게이터 생성
 const RootNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="TabNavigator">
+    <Stack.Navigator initialRouteName="LoginScreen">
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
