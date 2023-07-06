@@ -6,11 +6,7 @@ import color from "../../common/color";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 
-const CircleIconButton = ({
-  btnColor = color.COLOR_MAIN,
-  name,
-  onPress = () => {},
-}) => {
+const CircleIconButton = ({ btnColor = color.COLOR_MAIN, name, onPress = () => {} }) => {
   return (
     <Container>
       <Button style={styles.button} btnColor={btnColor} onPress={onPress}>

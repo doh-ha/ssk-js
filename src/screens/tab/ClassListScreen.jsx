@@ -1,15 +1,15 @@
 import React from "react";
 import MainLayout from "../../components/common/MainLayout";
-import ProfileImage from "../../components/common/ProfileImage";
 import styled from "styled-components/native";
-import ClassContainer from "../../components/classList/ClassContainer";
 import ClassItem from "../../components/common/ClassItem";
-
+import CircleIconButton from "../../components/common/CircleIconButton";
+import { Text } from "react-native";
 const ClassListScreen = () => {
   return (
     <>
       <MainLayout headerText={"수업 목록"} headerType={"basic"}>
         <Container data={[0, 1]} renderItem={ClassItem} />
+        <CircleIconButton name="plus" />
       </MainLayout>
     </>
   );
