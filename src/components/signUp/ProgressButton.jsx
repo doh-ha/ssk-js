@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import styled from "styled-components/native";
+import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons'; 
 
@@ -65,9 +66,13 @@ const ProgressButton = ({ page, email, password, name, role, setPage }) => {
       break;
     case "BasicInfoPage":
       handleButton = async () => {
-        await addForm({email, password, name});
-        await createForm();
-        setPage("CompletePage");
+        if (email && password && name) {
+          await addForm({email, password, name});
+          await createForm();
+          setPage("CompletePage");
+        } else {
+          Toast.show({type: "error", text1: "모든 정보를 기입해주세요."});
+        };
       };
       handleBackButton = () => {
         setPage("RolePage");
@@ -125,9 +130,16 @@ const ProgressButton = ({ page, email, password, name, role, setPage }) => {
   }
 
   return (
-    <Wrapper>
-      {component}
-    </Wrapper>
+    <>
+      <Toast
+        position="bottom"
+        bottomOffset={60}
+        visibilityTime={1200}
+      />
+      <Wrapper>
+        {component}
+      </Wrapper>
+    </>
   );
 };
 

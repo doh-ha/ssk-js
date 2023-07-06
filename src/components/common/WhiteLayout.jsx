@@ -28,12 +28,12 @@ const Wrapper = styled(SafeAreaView)`
 const Inner = styled.ScrollView`
   width: 100%;
   flex: 1;
-  background-color: ${color.COLOR_GRAY_BACKGROUND};
+  background-color: #fff;
 `;
 
 const Contents = styled.View`
   width: 100%;
   flex: 1;
-  background-color: ${color.COLOR_GRAY_BACKGROUND};
+  background-color: #fff;
   padding-bottom: 100;
 `;

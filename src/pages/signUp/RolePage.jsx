@@ -3,11 +3,11 @@ import styled from "styled-components/native";
 
 const RolePage = ({ role, setRole }) => {
   const handleTutorButton = () => {
-    setRole("Tutor");
+    setRole("tutor");
   };
 
   const handleTuteeButton = () => {
-    setRole("Tutee");
+    setRole("tutee");
   };
 
   return (
@@ -23,18 +23,19 @@ const RolePage = ({ role, setRole }) => {
           shadowOpacity: 0.25,
           shadowRadius: 3.84,
           elevation: 2,
-          borderWidth: role === "Tutor" ? 2 : 0,
-          borderColor: role === "Tutor" ? "#0C9BFB" : "transparent",
+          borderWidth: role === "tutor" ? 2 : 0,
+          borderColor: role === "tutor" ? "#0C9BFB" : "transparent",
         }}
       >
         <RoleText
           style={{
-            color: role === "Tutor" ? "#0C9BFB" : "696969",
+            color: role === "tutor" ? "#0C9BFB" : "696969",
           }}
         >
           튜터로 가입하기
         </RoleText>
         <MediaContainer>
+          <RoleImage source={require("../../assets/images/tutorImage.png")} />
         </MediaContainer>
       </ButtonContainer>
       <ButtonContainer
@@ -48,18 +49,19 @@ const RolePage = ({ role, setRole }) => {
           shadowOpacity: 0.25,
           shadowRadius: 3.84,
           elevation: 2,
-          borderWidth: role === "Tutee" ? 2 : 0,
-          borderColor: role === "Tutee" ? "#0C9BFB" : "transparent",
+          borderWidth: role === "tutee" ? 2 : 0,
+          borderColor: role === "tutee" ? "#0C9BFB" : "transparent",
         }}
       >
         <RoleText
           style={{
-            color: role === "Tutee" ? "#0C9BFB" : "#696969",
+            color: role === "tutee" ? "#0C9BFB" : "#696969",
           }}
         >
           튜티로 가입하기
         </RoleText>
         <MediaContainer>
+          <RoleImage source={require("../../assets/images/tuteeImage.png")} />
         </MediaContainer>
       </ButtonContainer>
     </Wrapper>
@@ -82,21 +84,27 @@ const Wrapper = styled.View`
 const ButtonContainer = styled.TouchableOpacity`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: #fff;
   border-radius: 4px;
   padding: 10px;
-  padding-top: 20px;
+  gap: 5px;
 `;  
 
 const MediaContainer = styled.View`
   justify-content: center;
   align-items: center;
-  width: 250px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   overflow: hidden;
+`;
+
+const RoleImage = styled.Image`
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
 `;
 
 const RoleText = styled.Text`

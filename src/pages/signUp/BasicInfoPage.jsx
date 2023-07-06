@@ -3,10 +3,10 @@ import styled from "styled-components/native";
 
 const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [nameError, setNameError] = useState("");
 
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,6 +28,8 @@ const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName }
   const validateConfirmPassword = () => {
     if (password !== confirmPassword) {
       setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
+    } else if (confirmPassword === "") {
+      setConfirmPasswordError("비밀번호 확인을 입력해주세요.")
     } else {
       setConfirmPasswordError("");
     }
@@ -45,68 +47,80 @@ const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName }
     <>
       <Wrapper>
         <ContentWrapper>
-          <WarningContainer>
-            <WarningText>
-              {emailError}
-            </WarningText>
-          </WarningContainer>
-          <FormContainer>
+          <FormHeader>
+            <FormHeaderText>
+              이름
+            </FormHeaderText>
+            <WarningContainer>
+              <WarningText>
+                {nameError}
+              </WarningText>
+            </WarningContainer>
+          </FormHeader>
+          <FormContainer error={nameError}>
             <SignUpForm
-              value={email}
-              onChangeText={setEmail}
-              onBlur={validateEmail}
-              placeholder="이메일"
-              placeholderTextColor="#979797"
+              value={name}
+              onChangeText={setName}
+              onBlur={validateName}
             />
           </FormContainer>
         </ContentWrapper>
         <ContentWrapper>
-          <WarningContainer>
-            <WarningText>
-              {passwordError}
-            </WarningText>
-          </WarningContainer>
-          <FormContainer>
+          <FormHeader>
+            <FormHeaderText>
+              이메일
+            </FormHeaderText>
+            <WarningContainer>
+              <WarningText>
+                {emailError}
+              </WarningText>
+            </WarningContainer>
+          </FormHeader>
+          <FormContainer error={emailError}>
+            <SignUpForm
+              value={email}
+              onChangeText={setEmail}
+              onBlur={validateEmail}
+            />
+          </FormContainer>
+        </ContentWrapper>
+        <ContentWrapper>
+          <FormHeader>
+            <FormHeaderText>
+              비밀번호
+            </FormHeaderText>
+            <WarningContainer>
+              <WarningText>
+                {passwordError}
+              </WarningText>
+            </WarningContainer>
+          </FormHeader>
+          <FormContainer error={passwordError}>
             <SignUpForm
               value={password}
               onChangeText={setPassword}
               onBlur={validatePassword}
               secureTextEntry
-              placeholder="비밀번호"
-              placeholderTextColor="#979797"
             />
           </FormContainer>
         </ContentWrapper>
         <ContentWrapper>
-          <WarningContainer>
-            <WarningText>
-              {confirmPasswordError}
-            </WarningText>
-          </WarningContainer>
-          <FormContainer>
+          <FormHeader>
+            <FormHeaderText>
+              비밀번호 확인
+            </FormHeaderText>
+            <WarningContainer>
+              <WarningText>
+                {confirmPasswordError}
+              </WarningText>
+            </WarningContainer>
+          </FormHeader>
+          <FormContainer error={confirmPasswordError}>
             <SignUpForm
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               onBlur={validateConfirmPassword}
               secureTextEntry
-              placeholder="비밀번호 확인"
-              placeholderTextColor="#979797"
-            />
-          </FormContainer>
-        </ContentWrapper>
-        <ContentWrapper>
-          <WarningContainer>
-            <WarningText>
-              {nameError}
-            </WarningText>
-          </WarningContainer>
-          <FormContainer>
-            <SignUpForm
-              value={name}
-              onChangeText={setName}
-              onBlur={validateName}
-              placeholder="이름"
-              placeholderTextColor="#979797"
             />
           </FormContainer>
         </ContentWrapper>
@@ -128,6 +142,16 @@ const Wrapper = styled.View`
   gap: 15px;
 `;
 
+const FormHeader = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  margin-bottom: 7px;
+`;
+
 const FormContainer = styled.View`
   width: 100%;
   display: flex;
@@ -136,6 +160,14 @@ const FormContainer = styled.View`
   align-items: center;
   background-color: #fff;
   border-radius: 4px;
+  border: 1px solid #eaeaea;
+  border-color: ${(props) => props.error !== "" ? "#EB4040" : "#eaeaea"};
+`;
+
+const FormHeaderText = styled.Text`
+  font-size: 16px;
+  font-family: "Regular";
+  color: #8a8a8a;
 `;
 
 const SignUpForm = styled.TextInput`
@@ -145,12 +177,14 @@ const SignUpForm = styled.TextInput`
 `;
 
 const WarningContainer = styled.View`
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 const WarningText = styled.Text`
-  padding: 0 15px;
-  color: #DB4455;
+  color: #EB4040;
   font-size: 13px;
 `;
 

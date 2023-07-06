@@ -94,6 +94,7 @@ const HeaderWrapper = styled.View`
 const Text = styled.Text`
   font-size: 24px;
   color: #fff;
+  font-family: "ExtraBold";
 `;
 
 const TouchableArea = styled.TouchableOpacity`

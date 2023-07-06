@@ -3,6 +3,8 @@ import styled from "styled-components/native";
 
 import color from "../../common/color";
 
+import { FontAwesome5 } from "@expo/vector-icons";
+
 import CalendarHeader from "./CalendarHeader";
 import CalendarBody from "./CalendarBody";
 import CalendarDatePicker from "./CalendarDatePicker";
@@ -22,6 +24,9 @@ const Calendar = () => {
 
   // date picker 보여짐 여부
   const [showPicker, setShowPicker] = useState(false);
+
+  // 달력 모드: 일지 달력 or 일정 달력
+  const [scheduleMode, setScheduleMode] = useState(true);
 
   // 헤더 chevron 아이콘 클릭 시 실행되는 이벤트 함수
   // 월 이동
@@ -77,10 +82,27 @@ const Calendar = () => {
         handleToggleShowPicker={handleToggleShowPicker}
       />
 
-      {/* 오늘 날짜로 이동하는 버튼 */}
-      <TodayButton onPress={handlePressToday}>
-        <TodayText>today</TodayText>
-      </TodayButton>
+      <ButtonWrapper>
+        {/* 일정 달력 <-> 일지 달력 전환 버튼 */}
+        <Button
+          btnColor={color.COLOR_LAVENDER}
+          onPress={() => setScheduleMode(!scheduleMode)}
+        >
+          <FontAwesome5
+            name="calendar-alt"
+            size={12}
+            color={color.COLOR_LAVENDER}
+            style={{ marginRight: 3 }}
+          />
+          <ButtonText btnColor={color.COLOR_LAVENDER}>
+            {scheduleMode ? "일지" : "일정"} 달력
+          </ButtonText>
+        </Button>
+        {/* 오늘 날짜로 이동하는 버튼 */}
+        <Button btnColor={color.COLOR_MAIN} onPress={handlePressToday}>
+          <ButtonText btnColor={color.COLOR_MAIN}>today</ButtonText>
+        </Button>
+      </ButtonWrapper>
 
       {/* 캘린더 바디 */}
       <CalendarBody
@@ -109,18 +131,26 @@ const Container = styled.View`
   background-color: ${color.COLOR_WHITE_BACKGROUND};
 `;
 
-const TodayButton = styled.Pressable`
+const ButtonWrapper = styled.View`
+  margin-bottom: 10;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Button = styled.Pressable`
   align-self: flex-end;
-  border-color: ${color.COLOR_MAIN};
+  border-color: ${({ btnColor }) => btnColor};
   border-width: 1;
   border-radius: 100;
   padding-horizontal: 7;
   padding-vertical: 3;
-  margin-right: 10;
-  margin-bottom: 10;
+  margin-horizontal: 10;
+  flex-direction: row;
+  align-items: center;
 `;
 
-const TodayText = styled.Text`
+const ButtonText = styled.Text`
   font-size: 12;
-  color: ${color.COLOR_MAIN};
+  color: ${({ btnColor }) => btnColor};
 `;
