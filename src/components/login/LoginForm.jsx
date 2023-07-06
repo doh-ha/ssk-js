@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
-import { storeData } from "../../constants/asyncStorage";
+import { storeData, getData } from "../../constants/asyncStorage";
 
 const LoginForm = ({ successMessage, errorMessage }) => {
   const navigation = useNavigation();
@@ -19,8 +19,10 @@ const LoginForm = ({ successMessage, errorMessage }) => {
     console.log("보내기 전", loginData);
     try {
       const response = await axios.post("http://ec2-43-201-71-214.ap-northeast-2.compute.amazonaws.com/api/auth/login", loginData);
-      storeData("access-token", response.data.accessToken);
+      await storeData("access-token", response.data.accessToken);
       console.log("response: ", response);
+      const storage = await getData("access-token");
+      console.log("스토리지", storage);
       successMessage();
       setTimeout(() => {
         navigation.navigate("TabNavigator");
