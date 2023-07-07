@@ -75,28 +75,13 @@ const Calendar = () => {
   return (
     <Container>
       {/* 년 & 월 보여주는 캘린더 헤더 */}
-      <CalendarHeader
-        selectedMonth={selectedMonth}
-        selectedYear={selectedYear}
-        handleMoveMonth={handleMoveMonth}
-        handleToggleShowPicker={handleToggleShowPicker}
-      />
+      <CalendarHeader selectedMonth={selectedMonth} selectedYear={selectedYear} handleMoveMonth={handleMoveMonth} handleToggleShowPicker={handleToggleShowPicker} />
 
       <ButtonWrapper>
         {/* 일정 달력 <-> 일지 달력 전환 버튼 */}
-        <Button
-          btnColor={color.COLOR_LAVENDER}
-          onPress={() => setScheduleMode(!scheduleMode)}
-        >
-          <FontAwesome5
-            name="calendar-alt"
-            size={12}
-            color={color.COLOR_LAVENDER}
-            style={{ marginRight: 3 }}
-          />
-          <ButtonText btnColor={color.COLOR_LAVENDER}>
-            {scheduleMode ? "일지" : "일정"} 달력
-          </ButtonText>
+        <Button btnColor={color.COLOR_LAVENDER} onPress={() => setScheduleMode(!scheduleMode)}>
+          <FontAwesome5 name="calendar-alt" size={12} color={color.COLOR_LAVENDER} style={{ marginRight: 3 }} />
+          <ButtonText btnColor={color.COLOR_LAVENDER}>{scheduleMode ? "일지" : "일정"} 달력</ButtonText>
         </Button>
         {/* 오늘 날짜로 이동하는 버튼 */}
         <Button btnColor={color.COLOR_MAIN} onPress={handlePressToday}>
@@ -105,22 +90,10 @@ const Calendar = () => {
       </ButtonWrapper>
 
       {/* 캘린더 바디 */}
-      <CalendarBody
-        selectedDate={selectedDate}
-        selectedMonth={selectedMonth}
-        selectedYear={selectedYear}
-        handlePressDate={handlePressDate}
-        handleMoveMonth={handleMoveMonth}
-      />
+      <CalendarBody selectedDate={selectedDate} selectedMonth={selectedMonth} selectedYear={selectedYear} handlePressDate={handlePressDate} handleMoveMonth={handleMoveMonth} />
 
       {/* 캘린더 Date Picker 컴포넌트 */}
-      {showPicker && (
-        <CalendarDatePicker
-          setShowPicker={setShowPicker}
-          selectedDate={selectedDate}
-          handlePickDate={handlePickDate}
-        />
-      )}
+      {showPicker && <CalendarDatePicker setShowPicker={setShowPicker} selectedDate={selectedDate} handlePickDate={handlePickDate} />}
     </Container>
   );
 };
@@ -128,7 +101,7 @@ const Calendar = () => {
 export default Calendar;
 
 const Container = styled.View`
-  background-color: ${color.COLOR_WHITE_BACKGROUND};
+  background-color: color.COLOR_WHITE_BACKGROUND};
 `;
 
 const ButtonWrapper = styled.View`
