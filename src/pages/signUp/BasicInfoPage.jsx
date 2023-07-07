@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { KeyboardAvoidingView, ScrollView } from "react-native";
+import { Keyboard, ScrollView } from "react-native";
 
-const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName }) => {
+const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName, isKeyboardShown }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -46,91 +46,90 @@ const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName }
 
   return (
     <>
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'android' ? 'position' : 'padding'}
-      style={{ flex: 1 }}
-    >
-      <Wrapper>
-        <ContentWrapper>
-          <FormHeader>
-            <FormHeaderText>
-              이름
-            </FormHeaderText>
-            <WarningContainer>
-              <WarningText>
-                {nameError}
-              </WarningText>
-            </WarningContainer>
-          </FormHeader>
-          <FormContainer error={nameError}>
-            <SignUpForm
-              value={name}
-              onChangeText={setName}
-              onBlur={validateName}
-            />
-          </FormContainer>
-        </ContentWrapper>
-        <ContentWrapper>
-          <FormHeader>
-            <FormHeaderText>
-              이메일
-            </FormHeaderText>
-            <WarningContainer>
-              <WarningText>
-                {emailError}
-              </WarningText>
-            </WarningContainer>
-          </FormHeader>
-          <FormContainer error={emailError}>
-            <SignUpForm
-              value={email}
-              onChangeText={setEmail}
-              onBlur={validateEmail}
-            />
-          </FormContainer>
-        </ContentWrapper>
-        <ContentWrapper>
-          <FormHeader>
-            <FormHeaderText>
-              비밀번호
-            </FormHeaderText>
-            <WarningContainer>
-              <WarningText>
-                {passwordError}
-              </WarningText>
-            </WarningContainer>
-          </FormHeader>
-          <FormContainer error={passwordError}>
-            <SignUpForm
-              value={password}
-              onChangeText={setPassword}
-              onBlur={validatePassword}
-              secureTextEntry
-            />
-          </FormContainer>
-        </ContentWrapper>
-        <ContentWrapper>
-          <FormHeader>
-            <FormHeaderText>
-              비밀번호 확인
-            </FormHeaderText>
-            <WarningContainer>
-              <WarningText>
-                {confirmPasswordError}
-              </WarningText>
-            </WarningContainer>
-          </FormHeader>
-          <FormContainer error={confirmPasswordError}>
-            <SignUpForm
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              onBlur={validateConfirmPassword}
-              secureTextEntry
-            />
-          </FormContainer>
-        </ContentWrapper>
-      </Wrapper>
-    </KeyboardAvoidingView>
+      <ScrollView
+        scrollEnabled={isKeyboardShown === true ? true : false}
+      >
+        <Wrapper>
+          <ContentWrapper>
+            <FormHeader>
+              <FormHeaderText>
+                이름
+              </FormHeaderText>
+              <WarningContainer>
+                <WarningText>
+                  {nameError}
+                </WarningText>
+              </WarningContainer>
+            </FormHeader>
+            <FormContainer error={nameError}>
+              <SignUpForm
+                value={name}
+                onChangeText={setName}
+                onBlur={validateName}
+              />
+            </FormContainer>
+          </ContentWrapper>
+          <ContentWrapper>
+            <FormHeader>
+              <FormHeaderText>
+                이메일
+              </FormHeaderText>
+              <WarningContainer>
+                <WarningText>
+                  {emailError}
+                </WarningText>
+              </WarningContainer>
+            </FormHeader>
+            <FormContainer error={emailError}>
+              <SignUpForm
+                value={email}
+                onChangeText={setEmail}
+                onBlur={validateEmail}
+              />
+            </FormContainer>
+          </ContentWrapper>
+          <ContentWrapper>
+            <FormHeader>
+              <FormHeaderText>
+                비밀번호
+              </FormHeaderText>
+              <WarningContainer>
+                <WarningText>
+                  {passwordError}
+                </WarningText>
+              </WarningContainer>
+            </FormHeader>
+            <FormContainer error={passwordError}>
+              <SignUpForm
+                value={password}
+                onChangeText={setPassword}
+                onBlur={validatePassword}
+                secureTextEntry
+              />
+            </FormContainer>
+          </ContentWrapper>
+          <ContentWrapper>
+            <FormHeader>
+              <FormHeaderText>
+                비밀번호 확인
+              </FormHeaderText>
+              <WarningContainer>
+                <WarningText>
+                  {confirmPasswordError}
+                </WarningText>
+              </WarningContainer>
+            </FormHeader>
+            <FormContainer error={confirmPasswordError}>
+              <SignUpForm
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                onBlur={validateConfirmPassword}
+                secureTextEntry
+              />
+            </FormContainer>
+          </ContentWrapper>
+        </Wrapper>
+      </ScrollView>
     </>
   );
 };
