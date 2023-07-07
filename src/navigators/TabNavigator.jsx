@@ -14,7 +14,7 @@ const TabBar = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <TabBar.Navigator
-      initialRouteName="Home"
+      initialRouteName="ClassList" //임시
       screenOptions={{
         tabBarStyle: {
           backgroundColor: color.COLOR_WHITE_BACKGROUND,
