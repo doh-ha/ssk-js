@@ -32,8 +32,7 @@ const Wrapper = styled.View`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-conten: center;
-  align-items: left;
+  justify-content: center;
   padding: 8px 10px;
   border-bottom-width: 1px;
   border-bottom-color: ${color.COLOR_MAIN};
