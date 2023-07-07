@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import color from "../../common/color";
 
 import ClassItem from "./ClassItem";
+import { View } from "react-native";
 
 const ClassList = () => {
   return (
@@ -15,6 +16,7 @@ const ClassList = () => {
 export default ClassList;
 
 const Container = styled.FlatList`
+  //   background-color: orange;
   width: 100%;
-  overflow: auto;
+  overflow: visible;
 `;
