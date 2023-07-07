@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
 
 const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -45,6 +46,10 @@ const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName }
 
   return (
     <>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'android' ? 'position' : 'padding'}
+      style={{ flex: 1 }}
+    >
       <Wrapper>
         <ContentWrapper>
           <FormHeader>
@@ -125,6 +130,7 @@ const BasicInfoPage = ({ email, password, name, setEmail, setPassword, setName }
           </FormContainer>
         </ContentWrapper>
       </Wrapper>
+    </KeyboardAvoidingView>
     </>
   );
 };
