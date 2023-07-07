@@ -4,9 +4,10 @@ import MainLayout from "../../components/common/MainLayout";
 import styled from "styled-components/native";
 import Calendar from "../../components/calendar/Calendar";
 import { useNavigation } from "@react-navigation/native";
-import { FlatList, ScrollView } from "react-native";
 import HwNotePreview from "../../components/homeworkNote/HwNotePreview";
 import ReviewNotePreview from "../../components/reviewNote/ReviewNotePreview";
+import StudentInfo from "../../components/classInfo/StudentInfo";
+import TeacherInfo from "../../components/classInfo/TeacherInfo";
 const ClassInfoScreen = () => {
   const navigation = useNavigation();
 
@@ -18,6 +19,8 @@ const ClassInfoScreen = () => {
   };
   return (
     <MainLayout headerText={"수업 정보"} headerType={"back"}>
+      <TeacherInfo />
+      <StudentInfo />
       <Calendar />
       <Wrapper>
         <TouchableArea onPress={handlePressHwBtn}>
