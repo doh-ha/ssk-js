@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import color from "../../common/color";
 
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Platform } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import ProfileImage from "../common/ProfileImage";
 
@@ -34,22 +34,30 @@ export default ScheduleItem;
 
 const styles = StyleSheet.create({
   container: {
-    shadowColor: color.COLOR_BOX_SHADOW,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 5,
     backgroundColor: color.COLOR_WHITE_BACKGROUND,
-    width: "100%",
+    width: "98%",
     height: 55,
     borderRadius: 5,
     marginVertical: 3,
     flexDirection: "row",
     alignItems: "center",
+    alignSelf: "center",
     paddingHorizontal: 20,
     paddingVertical: 7,
+    ...Platform.select({
+      ios: {
+        shadowColor: color.COLOR_BOX_SHADOW,
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
 });
 

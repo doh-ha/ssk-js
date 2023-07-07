@@ -14,7 +14,7 @@ const HomeScreen = () => {
 
   const navigateToCreateClass = () => {
     navigation.navigate("CreateClassScreen");
-  }
+  };
 
   return (
     <>
@@ -28,7 +28,7 @@ const HomeScreen = () => {
         </TodayClassView>
       </MainLayout>
 
-      <CircleIconButton name="plus" onPress={navigateToCreateClass}/>
+      <CircleIconButton name="plus" onPress={navigateToCreateClass} />
     </>
   );
 };
@@ -38,12 +38,11 @@ export default HomeScreen;
 const TodayClassView = styled.View`
   // background-color: orange;
   margin-vertical: 15;
-  padding-horizontal: 10;
 `;
 const TodayClassText = styled.Text`
   font-size: 16;
   font-weight: bold;
   color: ${color.COLOR_MAIN};
-  padding-horizontal: 10;
+  padding-horizontal: 15;
   padding-vertical: 5;
 `;
