@@ -6,7 +6,7 @@ const LoginOptions = () => {
   const navigation = useNavigation();
 
   const handleTempButton = () => {
-    navigation.navigate("TabNavigator");
+    navigation.navigate("NotificationScreen");
   }
 
   const handleSignUpButton = () => {
