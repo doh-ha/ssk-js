@@ -4,11 +4,10 @@ import { Entypo, FontAwesome5 } from "@expo/vector-icons";
 
 import color from "../common/color";
 
-import HomeScreen from "../screens/tab/HomeScreen";
-import ClassListScreen from "../screens/tab/ClassListScreen";
-import MyPageScreen from "../screens/tab/MyPageScreen";
-
 import HomeNavigator from "./HomeNavigator";
+import ClassListScreen from "../screens/tab/ClassListScreen";
+import MyPageNavigator from "./MyPageNavigator";
+import ClassListNavigator from "./ClassListNavigator";
 
 const TabBar = createBottomTabNavigator();
 
@@ -30,17 +29,11 @@ const TabNavigator = () => {
     >
       <TabBar.Screen
         name="ClassList"
-        component={ClassListScreen}
+        component={ClassListNavigator}
         options={{
           headerShown: false,
           tabBarLabel: "수업 목록",
-          tabBarIcon: ({ focused }) => (
-            <FontAwesome5
-              name="list-ul"
-              size={25}
-              color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON}
-            />
-          ),
+          tabBarIcon: ({ focused }) => <FontAwesome5 name="list-ul" size={25} color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON} />,
         }}
       />
       <TabBar.Screen
@@ -49,28 +42,16 @@ const TabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: "홈",
-          tabBarIcon: ({ focused }) => (
-            <Entypo
-              name="home"
-              size={30}
-              color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON}
-            />
-          ),
+          tabBarIcon: ({ focused }) => <Entypo name="home" size={30} color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON} />,
         }}
       />
       <TabBar.Screen
         name="MyPage"
-        component={MyPageScreen}
+        component={MyPageNavigator}
         options={{
           headerShown: false,
           tabBarLabel: "마이 페이지",
-          tabBarIcon: ({ focused }) => (
-            <FontAwesome5
-              name="user-alt"
-              size={24}
-              color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON}
-            />
-          ),
+          tabBarIcon: ({ focused }) => <FontAwesome5 name="user-alt" size={24} color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON} />,
         }}
       />
     </TabBar.Navigator>
