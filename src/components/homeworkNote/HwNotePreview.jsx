@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import color from "../../common/color";
 
-const HwNoteBox = () => {
+const HwNotePreview = () => {
   return (
     <>
       <Container>
@@ -15,7 +15,7 @@ const HwNoteBox = () => {
   );
 };
 
-export default HwNoteBox;
+export default HwNotePreview;
 
 const TextView = styled.View`
   margin-left: 10;
