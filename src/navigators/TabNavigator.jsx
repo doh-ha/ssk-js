@@ -45,15 +45,6 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => <Entypo name="home" size={30} color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON} />,
         }}
       />
-      <TabBar.Screen
-        name="MyPage"
-        component={MyPageNavigator}
-        options={{
-          headerShown: false,
-          tabBarLabel: "마이 페이지",
-          tabBarIcon: ({ focused }) => <FontAwesome5 name="user-alt" size={24} color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON} />,
-        }}
-      />
     </TabBar.Navigator>
   );
 };
