@@ -6,7 +6,7 @@ import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ReviewItem from "./ReviewItem";
 
-const ContinuingReview = () => {
+const FinishedReview = () => {
   const [sizes, setSizes] = useState({ width: "100%", height: "200" });
   const changeView = () => {
     if (sizes.width == "0px") {
@@ -22,14 +22,13 @@ const ContinuingReview = () => {
     <>
       <ContinuingContainer>
         <ClosedView>
-          <BoldText>진행 중인 복습</BoldText>
+          <BoldText>완료된 복습</BoldText>
           <Ionicons name={sizes.width == "0px" ? "chevron-down-outline" : "chevron-up-outline"} size={32} color="#0C9BFB" onPress={changeView} />
         </ClosedView>
         <OpenedView>
           <Detail sizes={sizes}>
             <Line />
-            <ReviewItem contentText={"확률과 통계"} tagColor="#FEA4FA" checked={false} />
-            <ReviewItem contentText={"지수와 로그"} tagColor="#FDE619" />
+            <ReviewItem>집합과 명제</ReviewItem>
           </Detail>
         </OpenedView>
       </ContinuingContainer>
@@ -37,7 +36,7 @@ const ContinuingReview = () => {
   );
 };
 
-export default ContinuingReview;
+export default FinishedReview;
 
 const ContinuingContainer = styled.View`
   display: flex;

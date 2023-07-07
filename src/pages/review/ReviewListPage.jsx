@@ -4,17 +4,19 @@ import MainLayout from "../../components/common/MainLayout";
 import ContinuingReview from "../../components/reviewNote/ContinuingReview";
 import color from "../../common/color";
 import { Ionicons } from "@expo/vector-icons";
+import FinishedReview from "../../components/reviewNote/FinishedReview";
 const ReviewListPage = () => {
   return (
     <MainLayout headerText={"복습 노트"} headerType={"back"}>
       <InnerWrapper>
         <TopWrapper>
-          <Ionicons name="create-outline" size={32} color="#B0B0B0" />
+          <Ionicons name="create-outline" size={32} color="#0000" />
           <BoldText>복습 목록</BoldText>
-          <Ionicons name="add-circle-outline" size={32} color="#0000" />
+          <Ionicons name="trash-outline" size={32} color="#B0B0B0" />
         </TopWrapper>
 
         <ContinuingReview />
+        <FinishedReview />
       </InnerWrapper>
     </MainLayout>
   );
