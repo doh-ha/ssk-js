@@ -2,14 +2,22 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 
 import color from "../../common/color";
+import TextInputForm from "../inputs/TextInputForm";
+import DatePickerForm from "../inputs/DatePickerForm";
+import RegularScheduleForm from "../inputs/RegularScheduleForm";
 
 const CreateClassForm = () => {
   return (
     <Wrapper>
       <FormContainer>
-        <TitleText>
-          과목 이름
-        </TitleText>
+        <TextInputForm
+          label="과목 이름"
+          placeholder={"과목 이름을 입력하세요."}
+        />
+
+        <RegularScheduleForm />
+
+        <DatePickerForm label="수업 시작일" />
       </FormContainer>
     </Wrapper>
   );
@@ -30,14 +38,4 @@ const FormContainer = styled.View`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: left;
-`;
-
-const TitleText = styled.Text`
-  padding: 0px 7px;
-  color: ${color.COLOR_MAIN};
-  font-size: 18px;
-  font-style: normal;
-  font-family: "Bold";
-  line-height: 22px;
 `;

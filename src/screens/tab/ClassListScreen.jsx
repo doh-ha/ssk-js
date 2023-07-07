@@ -16,7 +16,9 @@ const ClassListScreen = () => {
   return (
     <>
       <MainLayout headerText={"수업 목록"} headerType={"basic"}>
-        <TouchableOpacity onPress={() => navigation.navigate("ClassInfoScreen")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("ClassInfoScreen")}
+        >
           <ClassItem />
         </TouchableOpacity>
         <CircleIconButton name="plus" />
@@ -26,9 +28,10 @@ const ClassListScreen = () => {
 };
 
 export default ClassListScreen;
+
 const Container = styled.FlatList`
   width: 100%;
-  overflow: auto;
+  overflow: visible;
 `;
 
 const Button = styled.TouchableOpacity`

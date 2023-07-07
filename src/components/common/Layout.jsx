@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+// import { SafeAreaView } from "react-native-safe-area-context";
+
+import { SafeAreaView } from "react-native";
 
 const Layout = ({ children }) => {
   return (
@@ -24,4 +26,3 @@ const Inner = styled.View`
   flex: 1;
   background-color: #f8f9fa;
 `;
-

@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import color from "../../common/color";
 
 import { FontAwesome5 } from "@expo/vector-icons";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 import ProfileImage from "./ProfileImage";
 
@@ -29,23 +29,31 @@ export default ClassItem;
 
 const styles = StyleSheet.create({
   container: {
-    shadowColor: color.COLOR_BOX_SHADOW,
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowRadius: 3,
-    shadowOpacity: 0.25,
+    ...Platform.select({
+      ios: {
+        shadowColor: color.COLOR_BOX_SHADOW,
+        shadowOffset: {
+          width: 1,
+          height: 1,
+        },
+        shadowRadius: 3,
+        shadowOpacity: 0.25,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
 });
 
 const Container = styled.Pressable`
   background-color: ${color.COLOR_WHITE_BACKGROUND};
-  width: 100%;
+  width: 95%;
   margin-vertical: 4;
   border-radius: 5;
   flex-direction: row;
   align-items: center;
+  align-self: center;
   justify-content: space-between;
   padding-horizontal: 18;
   padding-vertical: 10;

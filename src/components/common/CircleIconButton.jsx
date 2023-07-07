@@ -4,9 +4,13 @@ import styled from "styled-components/native";
 import color from "../../common/color";
 
 import { FontAwesome5 } from "@expo/vector-icons";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
-const CircleIconButton = ({ btnColor = color.COLOR_MAIN, name, onPress = () => {} }) => {
+const CircleIconButton = ({
+  btnColor = color.COLOR_MAIN,
+  name,
+  onPress = () => {},
+}) => {
   return (
     <Container>
       <Button style={styles.button} btnColor={btnColor} onPress={onPress}>
@@ -20,13 +24,20 @@ export default CircleIconButton;
 
 const styles = StyleSheet.create({
   button: {
-    shadowColor: color.COLOR_BOX_SHADOW,
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
+    ...Platform.select({
+      ios: {
+        shadowColor: color.COLOR_BOX_SHADOW,
+        shadowOffset: {
+          width: 3,
+          height: 3,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
 });
 
