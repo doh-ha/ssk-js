@@ -6,7 +6,7 @@ import Calendar from "../../components/calendar/Calendar";
 import { useNavigation } from "@react-navigation/native";
 import { FlatList, ScrollView } from "react-native";
 import HwNotePreview from "../../components/homeworkNote/HwNotePreview";
-
+import ReviewNotePreview from "../../components/reviewNote/ReviewNotePreview";
 const ClassInfoScreen = () => {
   const navigation = useNavigation();
 
@@ -24,7 +24,7 @@ const ClassInfoScreen = () => {
           <HwNotePreview />
         </TouchableArea>
         <TouchableArea onPress={handlePressReviewBtn}>
-          <HwNotePreview />
+          <ReviewNotePreview />
         </TouchableArea>
       </Wrapper>
     </MainLayout>
