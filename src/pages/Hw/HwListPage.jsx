@@ -6,7 +6,7 @@ import { Text } from "react-native";
 const HwListPage = () => {
   return (
     <>
-      <MainLayout headerText={"숙제 노트"} headerType={"basic"}></MainLayout>
+      <MainLayout headerText={"숙제 노트"} headerType={"back"}></MainLayout>
       <Text>숙제노트페이지입니다</Text>
     </>
   );
