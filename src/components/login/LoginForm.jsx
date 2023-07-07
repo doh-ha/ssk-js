@@ -72,7 +72,7 @@ const Wrapper = styled.View`
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  padding: 15px 30px;
+  padding: 5px 30px;
 `;
 
 const FormWrapper = styled.View`

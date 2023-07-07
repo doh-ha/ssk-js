@@ -38,6 +38,7 @@
     "react-native-screens": "^3.22.0",
     "react-native-toast-message": "v2",
     "react-native-web": "~0.18.10",
+    "react-native-webview": "^13.2.2",
     "styled-components": "^5.1.26",
     "zustand": "^4.3.8"
   },

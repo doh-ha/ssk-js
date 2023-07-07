@@ -9,6 +9,7 @@ import Margin from "../../components/common/Margin";
 import LoginLogo from "../../components/login/LoginLogo";
 import LoginForm from "../../components/login/LoginForm";
 import LoginOptions from "../../components/login/LoginOptions";
+import KakaoLogin from "../../components/login/KakaoLogin";
 
 const LoginScreen = () => {
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
@@ -54,6 +55,7 @@ const LoginScreen = () => {
             </>
           )}
           <LoginForm successMessage={successMessage} errorMessage={errorMessage} />
+          <KakaoLogin />
           <LoginOptions />
         </PageWrapper>
       </Layout>

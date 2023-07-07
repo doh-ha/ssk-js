@@ -84,18 +84,18 @@ const Button = styled.TouchableOpacity`
 
 const DescText = styled.Text`
   font-size: 14px;
-  font-weight: 400px;
+  font-weight: 400;
   color: #979797;
 `;
 
 const SignUpText = styled.Text`
   font-size: 16px;
-  font-weight: 700px;
+  font-weight: 700;
   color: #0C9BFB;
 `;
 
 const OptionText = styled.Text`
   font-size: 14px;
-  font-weight: 400px;
+  font-weight: 400;
   color: #696969;
 `;
