@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
+import { Keyboard } from "react-native";
 import styled from "styled-components/native";
 
 import Layout from "../../components/common/Layout";
@@ -12,11 +13,33 @@ import CompletePage from "../../pages/signUp/CompletePage";
 import ProgressButton from "../../components/signUp/ProgressButton";
 
 const SignUpScreen = () => {
+  const [isKeyboardShown, setIsKeyboardShown] = useState(false);
   const [role, setRole] = useState("Tutor");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [page, setPage] = useState("RolePage");
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      Platform.OS === "android" ? "keyboardDidShow" : "keyboardWillShow",
+      () => {
+        setIsKeyboardShown(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      Platform.OS === "android" ? "keyboardDidHide" : "keyboardWillHide",
+      () => {
+        setIsKeyboardShown(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   let pageComponent;
   switch(page) {
@@ -36,9 +59,11 @@ const SignUpScreen = () => {
     case "BasicInfoPage":
       pageComponent = (
         <>
-          <SignUpTitle>
-            2. 로그인 정보 기입하기
-          </SignUpTitle>
+          {!isKeyboardShown && (
+            <SignUpTitle>
+              2. 로그인 정보 기입하기
+            </SignUpTitle>
+          )}
           <BasicInfoPage
             email={email}
             password={password}
@@ -46,6 +71,7 @@ const SignUpScreen = () => {
             setEmail={setEmail}
             setPassword={setPassword}
             setName={setName}
+            isKeyboardShown={isKeyboardShown}
           />
         </>
       )
@@ -63,21 +89,25 @@ const SignUpScreen = () => {
     <Layout>
       <Header text="회원가입" type="withBack"/>
       <Margin size={30} />
-      <SignUpProgressCircle page={page}/>
+      {!isKeyboardShown && (
+        <SignUpProgressCircle page={page}/>
+      )}
       <Margin size={10} />
       <ComponentWrapper>
         {pageComponent}
       </ComponentWrapper>
-      <ButtonWrapper>
-        <ProgressButton
-          role={role}
-          email={email}
-          password={password}
-          name={name}
-          page={page} 
-          setPage={setPage}
-        />
-      </ButtonWrapper>
+      {!isKeyboardShown && (
+        <ButtonWrapper>
+          <ProgressButton
+            role={role}
+            email={email}
+            password={password}
+            name={name}
+            page={page} 
+            setPage={setPage}
+          />
+        </ButtonWrapper>
+      )}
     </Layout>
   );
 };
