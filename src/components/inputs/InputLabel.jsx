@@ -16,7 +16,7 @@ export default InputLabel;
 const Label = styled.Text`
   color: ${color.COLOR_MAIN};
   font-weight: bold;
-  font-size: 18;
-  margin-left: 10;
-  margin-bottom: 3;
+  font-size: 16;
+  margin-left: 5;
+  margin-bottom: 5;
 `;

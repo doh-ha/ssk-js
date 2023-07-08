@@ -8,7 +8,7 @@ const InputContainer = ({ children, label }) => {
   return (
     <>
       <Container>
-        <InputLabel label={label} />
+        {label && <InputLabel label={label} />}
 
         <Contents>{children}</Contents>
       </Container>
@@ -19,13 +19,13 @@ const InputContainer = ({ children, label }) => {
 export default InputContainer;
 
 const Container = styled.View`
-  background-color: orange;
+  //   background-color: orange;
   width: 100%;
   padding-horizontal: 15;
   margin-vertical: 7;
 `;
 
 const Contents = styled.View`
-  height: 45;
+  height: 40;
   width: 100%;
 `;
