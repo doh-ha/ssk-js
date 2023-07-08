@@ -12,10 +12,7 @@ import BigButton from "../../components/common/BigButton";
 import { dateToTimeFormat, serverDateFormat } from "../../utils/date";
 
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import { APIURL } from "../../config/key";
 import client from "../../config/axios";
-import { getData } from "../../constants/asyncStorage";
 
 const CreateClassScreen = () => {
   // 과목 이름
@@ -58,13 +55,15 @@ const CreateClassScreen = () => {
     try {
       const ret = await client.post("/api/tutoring", body);
 
-      if (ret.status === 200) {
-        navigation.navigate("HomeScreen");
-      } else {
-        console.log("Create class: Something went wrong");
-      }
+      console.log(ret);
+
+      // if (ret.status === 200) {
+      //   navigation.navigate("HomeScreen");
+      // } else {
+      //   console.log("Create class: Something went wrong");
+      // }
     } catch (err) {
-      console.log("Create class request fail: ", err);
+      console.log("Create class request fail: ", err.message);
     }
   };
 
