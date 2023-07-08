@@ -29,7 +29,7 @@ client.interceptors.response.use(
     return response;
   },
   async function (error) {
-    navigation.navigate("로그인");
+    navigation.navigate("LoginScreen");
     return Promise.reject(error);
   }
 );
