@@ -27,5 +27,5 @@ const InputForm = styled.TextInput`
   border-width: 1;
   border-radius: 5;
   padding-horizontal: 15;
-  font-size: 18;
+  font-size: 16;
 `;
