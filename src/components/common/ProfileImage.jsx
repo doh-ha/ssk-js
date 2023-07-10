@@ -4,12 +4,13 @@ import styled from "styled-components/native";
 import color from "../../common/color";
 
 const ProfileImage = ({ size = 35, image }) => {
+
   return (
     <Container size={size}>
       <Image
         source={
           image
-            ? image
+            ? { uri: image }
             : require("../../assets/images/default_profile_image.png")
         }
       />

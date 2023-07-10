@@ -36,16 +36,17 @@ const OAuthLoginScreen = () => {
       console.log("userId:", userId);
 
       await storeData("access-token", accessToken);
-
-      setTimeout(() => {
-        if (isEnabled === "true") {
-          console.log("1됨", isEnabled)
-          navigation.navigate("TabNavigator");
-        } else {
-          console.log("2됨", isEnabled)
-          navigation.navigate("OAuthInfoScreen");
-        };
-      }, 1500);
+      if (accessToken) {
+        setTimeout(() => {
+          if (isEnabled === "true") {
+            console.log("1됨", isEnabled)
+            navigation.navigate("TabNavigator");
+          } else {
+            console.log("2됨", isEnabled)
+            navigation.navigate("OAuthInfoScreen");
+          };
+        }, 1500);
+      }
     }
   };
 
