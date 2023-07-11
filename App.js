@@ -5,8 +5,7 @@ import * as Font from "expo-font";
 
 import RootNavigator from "./src/navigators/RootNavigator";
 
-export default function App () {
-
+export default function App() {
   Font.loadAsync({
     Light: require("./src/assets/fonts/NanumSquareL.ttf"),
     Regular: require("./src/assets/fonts/NanumSquareR.ttf"),
@@ -24,5 +23,4 @@ export default function App () {
       </SafeAreaProvider>
     </>
   );
-};
-
+}

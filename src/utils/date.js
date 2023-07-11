@@ -5,6 +5,14 @@ export const dateFormat = (date) => {
   return moment(date).format("YYYY년 MM월 DD일");
 };
 
+export const dateToTimeFormat = (date) => {
+  return moment(date).format("HH:mm");
+};
+
+export const serverDateFormat = (date) => {
+  return moment(date).format("YYYY-MM-DD");
+};
+
 export const compareDates = (date1, date2) => {
   return dateFormat(date1) === dateFormat(date2);
 };

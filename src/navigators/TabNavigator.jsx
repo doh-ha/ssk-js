@@ -24,6 +24,7 @@ const TabNavigator = () => {
             height: -3,
           },
           shadowOpacity: 0.2,
+          elevation: 3,
         },
       }}
     >
@@ -33,7 +34,13 @@ const TabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: "수업 목록",
-          tabBarIcon: ({ focused }) => <FontAwesome5 name="list-ul" size={25} color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON} />,
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome5
+              name="list-ul"
+              size={25}
+              color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON}
+            />
+          ),
         }}
       />
       <TabBar.Screen
@@ -42,7 +49,28 @@ const TabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: "홈",
-          tabBarIcon: ({ focused }) => <Entypo name="home" size={30} color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON} />,
+          tabBarIcon: ({ focused }) => (
+            <Entypo
+              name="home"
+              size={30}
+              color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON}
+            />
+          ),
+        }}
+      />
+      <TabBar.Screen
+        name="MyPage"
+        component={MyPageNavigator}
+        options={{
+          headerShown: false,
+          tabBarLabel: "마이 페이지",
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome5
+              name="user-alt"
+              size={24}
+              color={focused ? color.COLOR_MAIN : color.COLOR_TAB_ICON}
+            />
+          ),
         }}
       />
     </TabBar.Navigator>
