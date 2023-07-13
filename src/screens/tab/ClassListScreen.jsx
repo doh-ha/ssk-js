@@ -4,23 +4,20 @@ import styled from "styled-components/native";
 import ClassItem from "../../components/common/ClassItem";
 import CircleIconButton from "../../components/common/CircleIconButton";
 import { useNavigation } from "@react-navigation/native";
-import { Text } from "react-native";
-import { TouchableOpacity } from "react-native";
+import StudentItem from "../../components/common/StudentItem";
 
 const ClassListScreen = () => {
   const navigation = useNavigation();
 
-  const handleClassComponentButton = () => {
+  const handleClassComponentBtn = () => {
     navigation.navigate("ClassInfoScreen");
   };
   return (
     <>
       <MainLayout headerText={"수업 목록"} headerType={"basic"}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ClassInfoScreen")}
-        >
-          <ClassItem />
-        </TouchableOpacity>
+        <TouchableArea onPress={handleClassComponentBtn}>
+          <StudentItem />
+        </TouchableArea>
         <CircleIconButton name="plus" />
       </MainLayout>
     </>
@@ -34,9 +31,10 @@ const Container = styled.FlatList`
   overflow: visible;
 `;
 
-const Button = styled.TouchableOpacity`
+const TouchableArea = styled.TouchableOpacity`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  activeopacity: 0.8;
 `;

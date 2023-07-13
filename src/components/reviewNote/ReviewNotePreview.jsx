@@ -3,12 +3,12 @@ import styled from "styled-components/native";
 import color from "../../common/color";
 import SubLayout from "../common/SubLayout";
 
-const HwNotePreview = () => {
+const ReviewNotePreview = () => {
   return (
     <SubLayout>
       <Container>
         <TextView>
-          <Text>숙제 노트</Text>
+          <Text>복습 노트</Text>
           <GreyText>더보기 </GreyText>
         </TextView>
       </Container>
@@ -16,7 +16,7 @@ const HwNotePreview = () => {
   );
 };
 
-export default HwNotePreview;
+export default ReviewNotePreview;
 
 const TextView = styled.View`
   margin-left: 10;
@@ -52,8 +52,10 @@ const Container = styled.View`
   flex-direction: row;
   flex: 1;
   alignitems: center;
+  //width: 50%;
   height: 100;
   padding-horizontal: 10;
 
-  margin-vertical: 10;
+  margin-vertical: 20;
+  //background-color: red;
 `;

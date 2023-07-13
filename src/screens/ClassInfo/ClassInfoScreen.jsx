@@ -4,9 +4,12 @@ import MainLayout from "../../components/common/MainLayout";
 import styled from "styled-components/native";
 import Calendar from "../../components/calendar/Calendar";
 import { useNavigation } from "@react-navigation/native";
-import { FlatList, ScrollView } from "react-native";
 import HwNotePreview from "../../components/homeworkNote/HwNotePreview";
-
+import ReviewNotePreview from "../../components/reviewNote/ReviewNotePreview";
+import StudentInfo from "../../components/classInfo/StudentInfo";
+import TeacherInfo from "../../components/classInfo/TeacherInfo";
+import SubLayout from "../../components/common/SubLayout";
+import ClassInfo from "../../components/classInfo/ClassInfo";
 const ClassInfoScreen = () => {
   const navigation = useNavigation();
 
@@ -18,15 +21,22 @@ const ClassInfoScreen = () => {
   };
   return (
     <MainLayout headerText={"수업 정보"} headerType={"back"}>
+      <SubLayout>
+        <InfroWrapper>
+          <TeacherInfo />
+          <StudentInfo />
+          <ClassInfo />
+        </InfroWrapper>
+      </SubLayout>
       <Calendar />
-      <Wrapper>
+      <SubLayout>
         <TouchableArea onPress={handlePressHwBtn}>
           <HwNotePreview />
         </TouchableArea>
         <TouchableArea onPress={handlePressReviewBtn}>
-          <HwNotePreview />
+          <ReviewNotePreview />
         </TouchableArea>
-      </Wrapper>
+      </SubLayout>
     </MainLayout>
   );
 };
@@ -43,4 +53,11 @@ const TouchableArea = styled.TouchableOpacity`
 const Wrapper = styled.View`
   margin-vertical: 15;
   padding-horizontal: 20;
+`;
+
+const InfroWrapper = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-vertical: 25;
 `;
