@@ -7,15 +7,18 @@ import { Ionicons } from "@expo/vector-icons";
 import FinishedReview from "../../components/reviewNote/FinishedReview";
 import KeyboardAvoidingLayout from "../../components/common/KeyboardAvoidingLayout";
 import TextInputForm from "../../components/inputs/TextInputForm";
+import CircleIconButton from "../../components/common/CircleIconButton";
+import { TouchableOpacity, TextInput } from "react-native";
 const ReviewListPage = () => {
-  const initialState = {
-    id: 0,
-    title: "",
-    discription: "",
-    completed: false,
+  const [task, setTask] = useState();
+
+  const handleAddTask = (value) => {
+    clickProps.addTask(value);
+    setTask(null);
   };
-  const [newTodo, setNewTodo] = useState(initialState);
-  const [todo, setTodo] = useState([]);
+  const onPress = () => {
+    console.log(task);
+  };
   return (
     <KeyboardAvoidingLayout>
       <MainLayout headerText={"복습 노트"} headerType={"back"}>
@@ -29,7 +32,10 @@ const ReviewListPage = () => {
           <ContinuingReview />
           <FinishedReview />
         </InnerWrapper>
-        <TextInputForm placeholder={"복습 내용을 입력하세요."} />
+        <TextInputForm placeholder={"복습 내용을 입력하세요."} value={task} onChangeText={(text) => setTask(text)} onSubmitEditing={onPress} />
+        <TouchableOpacity onPress={() => handleAddTask(task)}>
+          <CircleIconButton name="plus" />
+        </TouchableOpacity>
       </MainLayout>
     </KeyboardAvoidingLayout>
   );
