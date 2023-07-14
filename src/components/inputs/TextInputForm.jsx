@@ -7,11 +7,7 @@ const TextInputForm = ({ label, value, onChangeText, placeholder }) => {
   return (
     <>
       <InputContainer label={label}>
-        <InputForm
-          value={value}
-          onChangeText={onChangeText}
-          placeholder={placeholder}
-        />
+        <InputForm value={value} onChangeText={onChangeText} placeholder={placeholder} />
       </InputContainer>
     </>
   );
