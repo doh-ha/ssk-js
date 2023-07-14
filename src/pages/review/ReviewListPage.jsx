@@ -7,8 +7,8 @@ import { Ionicons } from "@expo/vector-icons";
 import FinishedReview from "../../components/reviewNote/FinishedReview";
 import KeyboardAvoidingLayout from "../../components/common/KeyboardAvoidingLayout";
 import TextInputForm from "../../components/inputs/TextInputForm";
-import CircleIconButton from "../../components/common/CircleIconButton";
-import { TouchableOpacity, TextInput } from "react-native";
+import { TouchableOpacity, TextInput, StyleSheet, View } from "react-native";
+import NoteTop from "./NoteTop";
 const ReviewListPage = () => {
   const [task, setTask] = useState();
 
@@ -23,19 +23,20 @@ const ReviewListPage = () => {
     <KeyboardAvoidingLayout>
       <MainLayout headerText={"복습 노트"} headerType={"back"}>
         <InnerWrapper>
-          <TopWrapper>
-            <Ionicons name="create-outline" size={32} color="#0000" />
-            <BoldText>복습 목록</BoldText>
-            <Ionicons name="trash-outline" size={32} color="#B0B0B0" />
-          </TopWrapper>
-
+          <NoteTop />
           <ContinuingReview />
           <FinishedReview />
         </InnerWrapper>
-        <TextInputForm placeholder={"복습 내용을 입력하세요."} value={task} onChangeText={(text) => setTask(text)} onSubmitEditing={onPress} />
-        <TouchableOpacity onPress={() => handleAddTask(task)}>
-          <CircleIconButton name="plus" />
-        </TouchableOpacity>
+        <InputWrapper>
+          <Container>
+            <TextInput style={styles.inputField} value={task} onChangeText={(text) => setTask(text)} placeholder={"Write a task"} />
+          </Container>
+          <TouchableOpacity onPress={() => handleAddTask(task)}>
+            <View style={styles.button}>
+              <Ionicons name="arrow-up-outline" size={30} color="#0C9BFB" />
+            </View>
+          </TouchableOpacity>
+        </InputWrapper>
       </MainLayout>
     </KeyboardAvoidingLayout>
   );
@@ -43,19 +44,39 @@ const ReviewListPage = () => {
 
 export default ReviewListPage;
 
-const TopWrapper = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-vertical: 20;
-`;
-
-const BoldText = styled.Text`
-  font-size: 24;
-  font-weight: bold;
-  color: ${color.COLOR_MAIN};
-`;
-
 const InnerWrapper = styled.View`
   margin-horizontal: 20;
 `;
+
+const InputWrapper = styled.View`
+  flex-direction: row;
+`;
+
+const Container = styled.TextInput`
+  width: 80%;
+  height: 100%;
+  background-color: ${color.COLOR_WHITE_BACKGROUND};
+  border-color: ${color.COLOR_MAIN};
+  border-width: 1;
+  border-radius: 5;
+  padding-horizontal: 15;
+  margin-horizontal: 15;
+  font-size: 16;
+  align-items: center;
+`;
+
+const styles = StyleSheet.create({
+  inputField: {
+    color: "#fff",
+    height: 50,
+    flex: 1,
+  },
+  button: {
+    height: 30,
+    width: 30,
+    borderRadius: 5,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
