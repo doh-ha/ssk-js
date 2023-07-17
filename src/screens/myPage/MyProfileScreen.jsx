@@ -75,7 +75,6 @@ const MyProfileScreen = () => {
           <ProfileInfo headerText="Tutor/Tutee" contentText={role} />
           <ProfileInfo headerText="이메일" contentText={email} />
         </ContentWrapper>
-      </WhiteLayout>
       { isOpened && <ConfirmModal 
         modalText="변경할 이름을 입력해주세요."
         confirmText="변경하기"
@@ -85,6 +84,7 @@ const MyProfileScreen = () => {
         newValue={newName}
         setNewValue={setNewName}
       />}
+      </WhiteLayout>
     </>
   );
 };

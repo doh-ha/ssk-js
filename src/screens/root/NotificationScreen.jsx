@@ -1,7 +1,10 @@
+import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components/native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+
+import { getData } from "../../constants/asyncStorage";
 
 import WhiteLayout from "../../components/common/WhiteLayout";
 
@@ -15,12 +18,19 @@ Notifications.setNotificationHandler({
 
 // Can use this function below OR use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(expoPushToken) {
+  const accessToken = await getData("access-token");
   const message = {
     to: expoPushToken,
     sound: 'default',
     title: 'Original Title',
     body: 'And here is the body!',
     data: { someData: 'goes here' },
+  };
+
+  // const sendToken = expoPushToken.match(/\[(.*?)\]/)[1];
+
+  const body = {
+    fcmToken: expoPushToken,
   };
 
   await fetch('https://exp.host/--/api/v2/push/send', {
@@ -32,7 +42,34 @@ async function sendPushNotification(expoPushToken) {
     },
     body: JSON.stringify(message),
   });
-}
+
+  try {
+    const response = await axios.post("http://ec2-43-201-71-214.ap-northeast-2.compute.amazonaws.com/api/fcm/token", body, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    console.log(response);
+    console.log(response.message);
+  } catch (error) {
+    console.log(error);
+    console.log(error.message);
+  };
+};
+
+const getTestPush = async () => {
+  const accessToken = await getData("access-token");
+  try {
+    const response = await axios.get("http://ec2-43-201-71-214.ap-northeast-2.compute.amazonaws.com/api/fcm/test", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 async function registerForPushNotificationsAsync() {
   let token;
@@ -47,7 +84,7 @@ async function registerForPushNotificationsAsync() {
       alert('Failed to get push token for push notification!');
       return;
     }
-    token = (await Notifications.getExpoPushTokenAsync({
+    token = (await Notifications.getDevicePushTokenAsync({
       projectId: process.env.EXPO_PUBLIC_EXPO_DEV_ID,
      })).data;
     console.log(token);
@@ -76,6 +113,7 @@ const NotificationScreen = () => {
   const responseListener = useRef();
 
   useEffect(() => {
+    getTestPush();
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {

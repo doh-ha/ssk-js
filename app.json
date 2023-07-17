@@ -22,7 +22,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "useNextNotificationsApi": true,
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.springbeam.susukgwan"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,6 +39,11 @@
           "photosPermission": "수숙관이 카메라 및 사진 앱에 접근하고자 합니다!"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c0bbecb6-1f82-4295-844e-0366edc20f89"
+      }
+    }
   }
 }

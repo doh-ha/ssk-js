@@ -55,12 +55,11 @@ export default ConfirmModal;
 
 // styled
 const Wrapper = styled.View`
-  position: fixed;
+  position: absolute;
   top: 0;
   max-width: 600px;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -75,7 +74,7 @@ const ModalContainer = styled.View`
   align-items: center;
   max-width: 600px;
   width: 80%;
-  padding: 1rem;
+  padding: 16px;
   background-color: #fff;
   border-radius: 12px;
   gap: 15px;
