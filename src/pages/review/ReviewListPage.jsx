@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import MainLayout from "../../components/common/MainLayout";
 import ContinuingReview from "../../components/reviewNote/ContinuingReview";
@@ -7,33 +7,109 @@ import { Ionicons } from "@expo/vector-icons";
 import FinishedReview from "../../components/reviewNote/FinishedReview";
 import KeyboardAvoidingLayout from "../../components/common/KeyboardAvoidingLayout";
 import TextInputForm from "../../components/inputs/TextInputForm";
-import { TouchableOpacity, TextInput, StyleSheet, View } from "react-native";
+import { TouchableOpacity, TextInput, StyleSheet, View, ScrollView, Text } from "react-native";
 import NoteTop from "./NoteTop";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 const ReviewListPage = () => {
-  const [task, setTask] = useState();
+  const initialState = { id: 0, content: "", completed: false };
 
-  const handleAddTask = (value) => {
-    clickProps.addTask(value);
-    setTask(null);
+  const [task, setTask] = useState([]);
+  const [newTask, setNewTask] = useState(initialState);
+
+  const getTasks = async () => {
+    const tasks = await AsyncStorage.getItem("task");
+    setTask(JSON.parse(tasks) ? JSON.parse(tasks) : []);
   };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
+  const handleChange = (content, value) => setNewTask({ ...newTask, [content]: value });
+
+  const clear = () => setNewTask(initialState);
+
+  const addTask = () => {
+    newTask.id = task.length + 1;
+    const updatedTask = [newTask, ...task];
+    setTask(updatedTask);
+    AsyncStorage.setItem("task", JSON.stringify(updatedTask));
+    clear();
+  };
+  const updateTask = (item) => {
+    const itemToBeUpdated = task.filter((taskItem) => taskItem.id == item.id);
+    itemToBeUpdated[0].completed = !itemToBeUpdated[0].completed;
+
+    const remainingTasks = task.filter((taskItem) => taskItem.id != item.id);
+    const updatedTask = [...itemToBeUpdated, ...remainingTasks];
+
+    setTask(updatedTask);
+    AsyncStorage.setItem("task", JSON.stringify(updatedTask));
+  };
+
   const onPress = () => {
     console.log(task);
   };
+
+  const displayTask = (item) => (
+    <TouchableOpacity
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderBottomColor: "black",
+        borderBottomWidth: 1,
+        paddingVertical: 16,
+      }}
+      onPress={() =>
+        Alert.alert(`${item.title}`, `${item.description}`, [
+          {
+            text: item.completed ? "Mark InProgress" : "Mark Completed",
+            onPress: () => updateTask(item),
+          },
+          {
+            text: "Ok",
+            style: "cancel",
+          },
+        ])
+      }
+    >
+      <BouncyCheckbox isChecked={item.completed ? true : false} fillColor="blue" onPress={() => updateTask(item)} />
+      <Text
+        style={{
+          color: "#000",
+          width: "90%",
+          fontSize: 16,
+          textDecorationLine: item.completed ? "line-through" : "none",
+        }}
+      >
+        {item.title}
+      </Text>
+    </TouchableOpacity>
+  );
   return (
     <KeyboardAvoidingLayout>
       <MainLayout headerText={"복습 노트"} headerType={"back"}>
         <InnerWrapper>
           <NoteTop />
           <ContinuingReview />
+          <ScrollView>
+            <View style={{ height: 250 }}>{task.map((item) => (!item.completed ? displayTask(item) : null))}</View>
+          </ScrollView>
           <FinishedReview />
+          <ScrollView>
+            <View style={{ height: 250 }}>{task.map((item) => (item.completed ? displayTask(item) : null))}</View>
+          </ScrollView>
         </InnerWrapper>
         <InputWrapper>
           <Container>
-            <TextInput style={styles.inputField} value={task} onChangeText={(text) => setTask(text)} placeholder={"Write a task"} />
+            <TextInput style={styles.inputField} onChangeText={(text) => setTask(text)} placeholder={"Write a task"} value={newTask.content} />
           </Container>
-          <TouchableOpacity onPress={() => handleAddTask(task)}>
+          <TouchableOpacity onPress={addTask}>
             <View style={styles.button}>
-              <Ionicons name="arrow-up-outline" size={30} color="#0C9BFB" />
+              <Ionicons name="arrow-up-outline" size={30} color="#0C9BFB" onPress={addTask} />
             </View>
           </TouchableOpacity>
         </InputWrapper>
