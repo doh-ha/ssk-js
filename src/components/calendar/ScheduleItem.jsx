@@ -4,29 +4,31 @@ import color from "../../common/color";
 
 import { Pressable, StyleSheet, Platform } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import ProfileImage from "../common/ProfileImage";
+import UserInfo from "../common/UserInfo";
 
-const ScheduleItem = ({ tagColor = color.COLOR_MAIN }) => {
+const ScheduleItem = ({
+  tagColor = color.COLOR_MAIN,
+  handlePressScheduleItem,
+  item,
+}) => {
   return (
-    <Pressable style={styles.container}>
-      <FontAwesome5 name="check" color={tagColor} size={20} />
+    <>
+      <Pressable
+        style={styles.container}
+        onPress={handlePressScheduleItem.bind(this, item)}
+      >
+        <FontAwesome5 name="check" color={tagColor} size={20} />
 
-      <TimeContainer>
-        <StartTime>18:00</StartTime>
-        <EndTime>~ 20:30</EndTime>
-      </TimeContainer>
+        <TimeContainer>
+          <StartTime>18:00</StartTime>
+          <EndTime>~ 20:30</EndTime>
+        </TimeContainer>
 
-      <VerticalLine tagColor={tagColor} />
+        <VerticalLine tagColor={tagColor} />
 
-      <UserInfoView>
-        <ProfileImage />
-
-        <TextView>
-          <InfoBigText>영어</InfoBigText>
-          <InfoSmallText>김영어 선생님</InfoSmallText>
-        </TextView>
-      </UserInfoView>
-    </Pressable>
+        <UserInfo />
+      </Pressable>
+    </>
   );
 };
 
@@ -80,27 +82,4 @@ const VerticalLine = styled.View`
   width: 5;
   border-radius: 100;
   background-color: ${({ tagColor }) => tagColor};
-`;
-
-const UserInfoView = styled.View`
-  //   background-color: orange;
-  flex-direction: row;
-  align-items: center;
-  margin-horizontal: 15;
-`;
-
-const TextView = styled.View`
-  margin-left: 10;
-`;
-
-const InfoBigText = styled.Text`
-  font-weight: bold;
-  font-size: 16;
-  margin-bottom: 3;
-`;
-
-const InfoSmallText = styled.Text`
-  font-weight: 500;
-  color: ${color.COLOR_GRAY_TEXT};
-  font-size: 12;
 `;

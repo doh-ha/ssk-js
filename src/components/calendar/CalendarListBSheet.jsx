@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components/native";
 
 import color from "../../common/color";
@@ -11,14 +11,23 @@ import ScheduleItem from "./ScheduleItem";
 import { Platform, FlatList } from "react-native";
 import useIsTutor from "../../hooks/useIsTutor";
 import CreateScheduleBSheet from "./CreateScheduleBSheet";
+import ScheduleDetailBSheet from "./ScheduleDetailBSheet";
 
 const CalendarListBSheet = ({ rbRef, selectedItem }) => {
   const isTutor = useIsTutor();
 
+  const [selectedSchedule, setSelectedSchedule] = useState(null);
+
   const createScheduleRbRef = useRef();
+  const scheduleRbRef = useRef();
 
   const handlePressButton = () => {
     createScheduleRbRef.current.open();
+  };
+
+  const handlePressScheduleItem = (item) => {
+    setSelectedSchedule(item);
+    scheduleRbRef?.current?.open();
   };
 
   return (
@@ -36,12 +45,25 @@ const CalendarListBSheet = ({ rbRef, selectedItem }) => {
             overflow: "visible",
           }}
           data={[0, 1, 2, 3]}
-          renderItem={({ item }) => <ScheduleItem {...item} />}
+          renderItem={({ item }) => (
+            <ScheduleItem
+              item={item}
+              handlePressScheduleItem={handlePressScheduleItem}
+            />
+          )}
         />
 
         {/* 일정 추가 바텀시트 */}
         <CreateScheduleBSheet
           rbRef={createScheduleRbRef}
+          date={selectedItem.date}
+          edit={isTutor}
+        />
+
+        {/* 일정 디테일 바텀시트 */}
+        <ScheduleDetailBSheet
+          rbRef={scheduleRbRef}
+          schedule={selectedSchedule}
           date={selectedItem.date}
           edit={isTutor}
         />
