@@ -5,6 +5,7 @@ import ClassItem from "../../components/common/ClassItem";
 import CircleIconButton from "../../components/common/CircleIconButton";
 import { useNavigation } from "@react-navigation/native";
 import StudentItem from "../../components/common/StudentItem";
+import ClassList from "../../components/common/ClassList";
 
 const ClassListScreen = () => {
   const navigation = useNavigation();
@@ -15,9 +16,12 @@ const ClassListScreen = () => {
   return (
     <>
       <MainLayout headerText={"수업 목록"} headerType={"basic"}>
-        <TouchableArea onPress={handleClassComponentBtn}>
+        {/* <TouchableArea onPress={handleClassComponentBtn}>
           <StudentItem />
-        </TouchableArea>
+        </TouchableArea> */}
+
+        <ClassList />
+
         <CircleIconButton name="plus" />
       </MainLayout>
     </>

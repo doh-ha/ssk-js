@@ -7,10 +7,17 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { StyleSheet, Platform } from "react-native";
 
 import ProfileImage from "./ProfileImage";
+import { useNavigation } from "@react-navigation/native";
 
 const ClassItem = () => {
+  const navigation = useNavigation();
+
+  const handlePressClassItem = () => {
+    navigation.navigate("ClassInfoScreen");
+  };
+
   return (
-    <Container style={styles.container}>
+    <Container style={styles.container} onPress={handlePressClassItem}>
       <UserInfoView>
         <ProfileImage />
 

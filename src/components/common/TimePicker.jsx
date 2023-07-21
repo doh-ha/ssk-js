@@ -73,10 +73,7 @@ const TimePicker = ({ startTime, setStartTime, endTime, setEndTime }) => {
 export default TimePicker;
 
 const Container = styled.View`
-  //   background-color: orange;
   width: 100%;
-  margin-vertical: 5;
-  padding-horizontal: 15;
 `;
 
 const TimeWrapper = styled.View`

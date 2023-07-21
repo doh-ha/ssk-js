@@ -156,12 +156,14 @@ const RegularScheduleForm = ({ days, setDays }) => {
       </SelectedList>
 
       {selectedDay && (
-        <TimePicker
-          startTime={startTime}
-          setStartTime={setStartTime}
-          endTime={endTime}
-          setEndTime={setEndTime}
-        />
+        <TimePickerContainer>
+          <TimePicker
+            startTime={startTime}
+            setStartTime={setStartTime}
+            endTime={endTime}
+            setEndTime={setEndTime}
+          />
+        </TimePickerContainer>
       )}
     </>
   );
@@ -216,4 +218,10 @@ const SelectedText = styled.Text`
   font-size: 14;
   font-weight: bold;
   color: ${color.COLOR_GRAY_TEXT};
+`;
+
+const TimePickerContainer = styled.View`
+  margin-vertical: 5;
+  padding-horizontal: 15;
+  width: 100%;
 `;
