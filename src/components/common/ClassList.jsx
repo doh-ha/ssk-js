@@ -8,7 +8,10 @@ import { View } from "react-native";
 const ClassList = () => {
   return (
     <>
-      <Container data={[0, 1]} renderItem={ClassItem} />
+      <Container
+        data={[0, 1]}
+        renderItem={({ item }) => <ClassItem {...item} />}
+      />
     </>
   );
 };
@@ -16,7 +19,6 @@ const ClassList = () => {
 export default ClassList;
 
 const Container = styled.FlatList`
-  //   background-color: orange;
   width: 100%;
   overflow: visible;
 `;
