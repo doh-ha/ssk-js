@@ -20,7 +20,7 @@ client.interceptors.request.use(
     return config;
   },
   function (error) {
-    console.log(error);
+    console.log("client error: ", error);
   }
 );
 

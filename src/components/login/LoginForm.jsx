@@ -18,7 +18,10 @@ const LoginForm = ({ successMessage, errorMessage }) => {
     };
     console.log("보내기 전", loginData);
     try {
-      const response = await axios.post("http://ec2-43-201-71-214.ap-northeast-2.compute.amazonaws.com/api/auth/login", loginData);
+      const response = await axios.post(
+        "http://ec2-43-201-71-214.ap-northeast-2.compute.amazonaws.com/api/auth/login",
+        loginData
+      );
       await storeData("access-token", response.data.accessToken);
       console.log("response: ", response);
       const storage = await getData("access-token");
@@ -30,7 +33,7 @@ const LoginForm = ({ successMessage, errorMessage }) => {
     } catch (error) {
       errorMessage();
       console.log("error: ", error);
-    };
+    }
   };
 
   return (
@@ -39,7 +42,7 @@ const LoginForm = ({ successMessage, errorMessage }) => {
         <FormWrapper>
           <FormInput
             editable
-            onChangeText={text => setEmail(text)}
+            onChangeText={(text) => setEmail(text)}
             value={email}
             placeholder="이메일"
             placeholderTextColor="#979797"
@@ -48,7 +51,7 @@ const LoginForm = ({ successMessage, errorMessage }) => {
         <FormWrapper>
           <FormInput
             editable
-            onChangeText={text => setPassword(text)}
+            onChangeText={(text) => setPassword(text)}
             value={password}
             placeholder="비밀번호"
             placeholderTextColor="#979797"
@@ -78,12 +81,12 @@ const Wrapper = styled.View`
 const FormWrapper = styled.View`
   background-color: #e9ecef;
   border-radius: 6px;
-  padding: 5px
+  padding: 5px;
 `;
 
 const FormInput = styled.TextInput`
   padding: 10px;
-  color: #0C9BFB;
+  color: #0c9bfb;
 `;
 
 const LoginButton = styled.TouchableOpacity`
@@ -93,7 +96,7 @@ const LoginButton = styled.TouchableOpacity`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #0C9BFB;
+  background-color: #0c9bfb;
   padding: 10px;
 `;
 

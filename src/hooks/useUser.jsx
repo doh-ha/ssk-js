@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getData, storeData } from "../constants/asyncStorage";
 import client from "../config/axios";
+import { Platform } from "react-native";
 
 const useUser = () => {
   const [userData, setUserData] = useState(null);
@@ -25,7 +26,7 @@ const useUser = () => {
           console.log("useUser: getUserData bad request");
         }
       } catch (err) {
-        console.log("useUser error: ", err);
+        console.log(`useUser error in ${Platform.OS}: `, err);
       }
     }
 
