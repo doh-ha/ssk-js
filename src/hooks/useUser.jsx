@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getData, storeData } from "../constants/asyncStorage";
 import client from "../config/axios";
 import { Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const useUser = () => {
   const [userData, setUserData] = useState(null);
+  const navigation = useNavigation();
 
   const getUserData = async () => {
     let role = await getData("role");
@@ -27,6 +29,12 @@ const useUser = () => {
         }
       } catch (err) {
         console.log(`useUser error in ${Platform.OS}: `, err);
+        if (err.response && err.response.status) {
+          // console.log(err.response.status);
+          if (err.response.status == 401) {
+            navigation.navigate("LoginScreen");
+          }
+        }
       }
     }
 

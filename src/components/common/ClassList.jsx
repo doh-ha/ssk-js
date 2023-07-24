@@ -7,12 +7,13 @@ import ClassItem from "./ClassItem";
 import { FlatList, StyleSheet } from "react-native";
 
 const ClassList = ({ classList }) => {
+  // console.log("classList:  ", classList);
   return (
     <>
       <FlatList
         style={styles.container}
         data={classList}
-        keyExtractor={(item) => `class_${item}`}
+        keyExtractor={(item) => `class_${item.tutoringId}`}
         renderItem={({ item }) => <ClassItem classItem={item} />}
       />
     </>

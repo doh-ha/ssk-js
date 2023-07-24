@@ -42,24 +42,26 @@ client.interceptors.response.use(
       const originalRequest = config;
       const refreshToken = await getData("refreshToken");
 
+      // console.log(refreshToken);
+      if (!refreshToken) {
+        return Promise.reject(error);
+      }
+
       try {
         // 토큰 재발급 IF-43
         const ret = await client.post(`/api/auth/refresh`, {
           refreshToken,
         });
-
         console.log("토큰 재발급: ", ret.data);
-
         if (ret.status == 200) {
           const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
             ret.data;
-
           await storeData("accessToken", newAccessToken);
           await storeData("refreshToken", newRefreshToken);
-
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
           return axios(originalRequest);
+        } else {
+          console.log("dd");
         }
       } catch (err) {
         console.log("토큰 재발급 에러: ", err);
@@ -70,7 +72,6 @@ client.interceptors.response.use(
       console.log("request conflict");
     }
 
-    // navigation.navigate("LoginScreen");
     return Promise.reject(error);
   }
 );

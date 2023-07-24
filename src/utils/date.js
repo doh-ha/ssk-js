@@ -17,7 +17,7 @@ export const compareDates = (date1, date2) => {
   return dateFormat(date1) === dateFormat(date2);
 };
 
-export const getTotalDays = (selectedMonth, selectedYear) => {
+export const getTotalDays = (selectedMonth, selectedYear, scheduleList) => {
   const prev = new Date(selectedYear, selectedMonth - 1, 0);
   const curr = new Date(selectedYear, selectedMonth, 0);
   const next = new Date(selectedYear, selectedMonth + 1, 0);
@@ -31,11 +31,20 @@ export const getTotalDays = (selectedMonth, selectedYear) => {
   //         state: prev, weekday, sat, sun, next,
   //         num: 날짜(일),
   //         date: 날짜,
-  //         day: 1 ~ 7
+  //         day: 1 ~ 7,
+  //         mark: true or false
   //     }
   // ]
   const days = [];
   let index = 0;
+  const markDate = {};
+
+  if (scheduleList) {
+    for (let i = 0; i < scheduleList.length; i++) {
+      const date = scheduleList[i].date;
+      markDate[date] = true;
+    }
+  }
 
   // prev month
   for (let i = prevLastDay; i < 6 && i >= 0; i--) {
@@ -51,6 +60,7 @@ export const getTotalDays = (selectedMonth, selectedYear) => {
       num: prevLastDate - i,
       date,
       day,
+      mark: false,
     });
     index++;
   }
@@ -64,12 +74,14 @@ export const getTotalDays = (selectedMonth, selectedYear) => {
         ? CalendarStates.sat
         : CalendarStates.weekday;
     const date = new Date(curr.getFullYear(), curr.getMonth(), i);
+    const mark = markDate[i] ? true : false;
 
     days.push({
       state,
       num: i,
       date,
       day: date.getDay() + 1,
+      mark,
     });
     index++;
   }
@@ -83,8 +95,19 @@ export const getTotalDays = (selectedMonth, selectedYear) => {
       num: i,
       date,
       day,
+      mark: false,
     });
   }
 
   return days;
+};
+
+export const Day = {
+  1: "월요일",
+  2: "화요일",
+  3: "수요일",
+  4: "목요일",
+  5: "금요일",
+  6: "토요일",
+  7: "일요일",
 };

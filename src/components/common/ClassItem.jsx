@@ -12,7 +12,8 @@ import useIsTutor from "../../hooks/useIsTutor";
 
 const ClassItem = ({ classItem }) => {
   const isTutor = useIsTutor();
-  const { subject, tutoringId, tuteeName, tutorName } = classItem;
+  const { profileImageUrl, subject, tutoringId, tuteeName, tutorName } =
+    classItem;
 
   const navigation = useNavigation();
 
@@ -27,7 +28,7 @@ const ClassItem = ({ classItem }) => {
       onPress={handlePressClassItem}
     >
       <UserInfoView>
-        <ProfileImage />
+        <ProfileImage image={profileImageUrl} />
 
         <UserTextView>
           <UserBigText>{subject}</UserBigText>
