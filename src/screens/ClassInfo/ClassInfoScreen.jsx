@@ -13,6 +13,7 @@ import TeacherInfo from "../../components/classInfo/TeacherInfo";
 import SubLayout from "../../components/common/SubLayout";
 import ClassInfo from "../../components/classInfo/ClassInfo";
 import client from "../../config/axios";
+import Loading from "../../components/common/Loading";
 
 const ClassInfoScreen = () => {
   const navigation = useNavigation();
@@ -20,10 +21,10 @@ const ClassInfoScreen = () => {
 
   const { tutoringId } = route.params;
 
-  const [date, setDate] = useState(new Date());
-  // assignmentList, color, dayTimeList, noteList, parentName
-  // reviewList, scheduleList, startDate, subject, tuteeName
-  // tutorName, tutoringId
+  const today = new Date();
+  const [year, setYear] = useState(today.getFullYear());
+  const [month, setMonth] = useState(today.getMonth() + 1);
+
   const [classInfo, setClassInfo] = useState(null);
 
   const handlePressHwBtn = () => {
@@ -34,16 +35,13 @@ const ClassInfoScreen = () => {
   };
 
   const getClassInfo = async () => {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-
     try {
       const ret = await client.get(
         `/api/tutoring/detail/${tutoringId}/${year}/${month}`
       );
 
-      console.log(ret.status);
-      console.log(ret.data);
+      // console.log(ret.status);
+      // console.log(ret.data);
 
       if (ret.status == 200) {
         setClassInfo(ret.data);
@@ -54,36 +52,48 @@ const ClassInfoScreen = () => {
   };
 
   useEffect(() => {
-    getClassInfo();
-  }, [date]);
-
-  if (!classInfo) {
-    return null;
-  }
+    if (year && month && tutoringId) {
+      getClassInfo();
+    }
+  }, [year, month, tutoringId]);
 
   return (
     <MainLayout headerText={"수업 정보"} headerType={"back"}>
-      <SubLayout>
-        <InfroWrapper>
-          <TeacherInfo />
-          <StudentInfo />
-          <ClassInfo />
-        </InfroWrapper>
-      </SubLayout>
-      <Calendar
-        dayTimeList={classInfo?.dayTimeList}
-        onChangeDate={(date) => {
-          setDate(date);
-        }}
-      />
-      <SubLayout>
-        <TouchableArea onPress={handlePressHwBtn}>
-          <HwNotePreview />
-        </TouchableArea>
-        <TouchableArea onPress={handlePressReviewBtn}>
-          <ReviewNotePreview />
-        </TouchableArea>
-      </SubLayout>
+      {!classInfo ? (
+        <Loading />
+      ) : (
+        <>
+          <SubLayout>
+            <InfroWrapper>
+              <TeacherInfo />
+              <StudentInfo />
+              <ClassInfo />
+            </InfroWrapper>
+          </SubLayout>
+
+          <Calendar
+            scheduleList={classInfo?.scheduleList}
+            onChangeYearMonth={(_year, _month) => {
+              if (_year !== year) {
+                setYear(_year);
+              }
+
+              if (_month !== month) {
+                setMonth(_month);
+              }
+            }}
+          />
+
+          <SubLayout>
+            <TouchableArea onPress={handlePressHwBtn}>
+              <HwNotePreview />
+            </TouchableArea>
+            <TouchableArea onPress={handlePressReviewBtn}>
+              <ReviewNotePreview />
+            </TouchableArea>
+          </SubLayout>
+        </>
+      )}
     </MainLayout>
   );
 };

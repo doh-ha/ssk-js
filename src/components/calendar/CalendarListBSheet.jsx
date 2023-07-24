@@ -8,7 +8,6 @@ import CalendarBSheetHeader from "./CalendarBSheetHeader";
 
 import ScheduleItem from "./ScheduleItem";
 
-import { Platform, FlatList } from "react-native";
 import useIsTutor from "../../hooks/useIsTutor";
 import CreateScheduleBSheet from "./CreateScheduleBSheet";
 import ScheduleDetailBSheet from "./ScheduleDetailBSheet";
@@ -40,18 +39,13 @@ const CalendarListBSheet = ({ rbRef, selectedItem }) => {
       >
         <CalendarBSheetHeader date={selectedItem.date} edit={isTutor} />
 
-        <FlatList
-          style={{
-            overflow: "visible",
-          }}
-          data={[0, 1, 2, 3]}
-          renderItem={({ item }) => (
-            <ScheduleItem
-              item={item}
-              handlePressScheduleItem={handlePressScheduleItem}
-            />
-          )}
-        />
+        {[0, 1, 2].map((item, idx) => (
+          <ScheduleItem
+            key={idx}
+            item={item}
+            handlePressScheduleItem={handlePressScheduleItem}
+          />
+        ))}
 
         {/* 일정 추가 바텀시트 */}
         <CreateScheduleBSheet
