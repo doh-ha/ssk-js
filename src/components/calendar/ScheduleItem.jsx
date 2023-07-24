@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 });
 
 const TimeContainer = styled.View`
-  margin-horizontal: 15;
+  margin-left: 15;
 `;
 
 const StartTime = styled.Text`
@@ -82,4 +82,5 @@ const VerticalLine = styled.View`
   width: 5;
   border-radius: 100;
   background-color: ${({ tagColor }) => tagColor};
+  margin-horizontal: 15;
 `;
