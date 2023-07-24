@@ -1,6 +1,7 @@
 import React from "react";
 import BottomSheet from "../common/BottomSheet";
 import CalendarBSheetHeader from "./CalendarBSheetHeader";
+import CalendarUserInfo from "./CalendarUserInfo";
 
 const ScheduleDetailBSheet = ({ rbRef, schedule, date, edit }) => {
   const handlePressButton = () => {
@@ -15,6 +16,8 @@ const ScheduleDetailBSheet = ({ rbRef, schedule, date, edit }) => {
         handlePressButton={handlePressButton}
       >
         <CalendarBSheetHeader date={date} edit={edit} />
+
+        <CalendarUserInfo />
       </BottomSheet>
     </>
   );

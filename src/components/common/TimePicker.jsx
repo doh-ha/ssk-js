@@ -7,6 +7,7 @@ import { Platform } from "react-native";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { dateToTimeFormat } from "../../utils/date";
+import LeftBarContainer from "./LeftBarContainer";
 
 const TimePicker = ({ startTime, setStartTime, endTime, setEndTime }) => {
   const [pressStartTime, setPressStartTime] = useState(false);
@@ -44,10 +45,14 @@ const TimePicker = ({ startTime, setStartTime, endTime, setEndTime }) => {
     <>
       <Container>
         <TimeWrapper>
-          <TimeView onPress={handlePressTime.bind(this, true)}>
+          {/* <TimeView onPress={handlePressTime.bind(this, true)}>
             <TimeLabel>Start Time</TimeLabel>
             <Time selected={pressStartTime}>{dateToTimeFormat(startTime)}</Time>
-          </TimeView>
+          </TimeView> */}
+
+          <LeftBarContainer label="Start Time" width="50%">
+            <Time selected={pressStartTime}>{dateToTimeFormat(startTime)}</Time>
+          </LeftBarContainer>
 
           <TimeView onPress={handlePressTime.bind(this, false)}>
             <TimeLabel>End Time</TimeLabel>
