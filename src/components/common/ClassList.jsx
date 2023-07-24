@@ -3,14 +3,17 @@ import styled from "styled-components/native";
 import color from "../../common/color";
 
 import ClassItem from "./ClassItem";
-import { View } from "react-native";
 
-const ClassList = () => {
+import { FlatList, StyleSheet } from "react-native";
+
+const ClassList = ({ classList }) => {
   return (
     <>
-      <Container
-        data={[0, 1]}
-        renderItem={({ item }) => <ClassItem {...item} />}
+      <FlatList
+        style={styles.container}
+        data={classList}
+        keyExtractor={(item) => `class_${item}`}
+        renderItem={({ item }) => <ClassItem classItem={item} />}
       />
     </>
   );
@@ -18,7 +21,9 @@ const ClassList = () => {
 
 export default ClassList;
 
-const Container = styled.FlatList`
-  width: 100%;
-  overflow: visible;
-`;
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    overflow: "visible",
+  },
+});

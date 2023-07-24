@@ -9,6 +9,8 @@ import DatePickerForm from "../../components/inputs/DatePickerForm";
 import RegularScheduleForm from "../../components/inputs/RegularScheduleForm";
 import BigButton from "../../components/common/BigButton";
 
+import Toast from "react-native-root-toast";
+
 import { dateToTimeFormat, serverDateFormat } from "../../utils/date";
 
 import { Alert } from "react-native";
@@ -77,7 +79,13 @@ const CreateClassScreen = () => {
         const ret = await client.post("/api/tutoring", body);
 
         if (ret.status === 200) {
-          navigation.navigate("HomeScreen");
+          Toast.show({
+            type: "success",
+            text1: "수업이 생성되었습니다!",
+          });
+          setTimeout(() => {
+            navigation.navigate("HomeScreen");
+          }, 2000);
         }
       } catch (err) {
         console.log("Create class request fail: ", err);
