@@ -11,6 +11,7 @@ import BigButton from "../../components/common/BigButton";
 
 import { dateToTimeFormat, serverDateFormat } from "../../utils/date";
 
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import client from "../../config/axios";
 
@@ -43,27 +44,58 @@ const CreateClassScreen = () => {
     return ret;
   };
 
+  const checkInput = (dayTimeList) => {
+    let ret = true;
+
+    if (!subject) {
+      Alert.alert("입력 오류", "과목 이름을 입력해주세요");
+      ret = false;
+    } else if (!startDate) {
+      Alert.alert("입력 오류", "수업 시작일을 선택해주세요");
+      ret = false;
+    } else if (dayTimeList.length == 0) {
+      Alert.alert("입력 오류", "정규 일정을 선택해주세요");
+      ret = false;
+    }
+
+    return ret;
+  };
+
   const handleCreateClass = async () => {
     const dayTimeList = parseDays();
 
-    const body = {
-      subject,
-      startDate: serverDateFormat(startDate),
-      dayTimeList,
-    };
+    if (!checkInput(dayTimeList)) {
+      return;
+    } else {
+      const body = {
+        subject,
+        startDate: serverDateFormat(startDate),
+        dayTimeList,
+      };
 
-    try {
-      const ret = await client.post("/api/tutoring", body);
+      try {
+        const ret = await client.post("/api/tutoring", body);
 
-      console.log(ret);
-
-      // if (ret.status === 200) {
-      //   navigation.navigate("HomeScreen");
-      // } else {
-      //   console.log("Create class: Something went wrong");
-      // }
-    } catch (err) {
-      console.log("Create class request fail: ", err.message);
+        if (ret.status === 200) {
+          setTimeout(() => {
+            navigation.navigate("HomeScreen");
+          }, 2000);
+        }
+      } catch (err) {
+        console.log("Create class request fail: ", err);
+        if (err.response && err.response.status) {
+          const status = err.response.status;
+          if (status == 409) {
+            // 수업 충돌
+            Alert.alert(
+              "수업 겹침",
+              "동일한 시간대에 겹치는 수업이 존재합니다."
+            );
+          } else if (status == 400) {
+            // Bad Request
+          }
+        }
+      }
     }
   };
 

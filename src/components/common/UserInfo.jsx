@@ -26,7 +26,6 @@ const UserInfoView = styled.View`
   //   background-color: orange;
   flex-direction: row;
   align-items: center;
-  margin-horizontal: 15;
 `;
 
 const TextView = styled.View`

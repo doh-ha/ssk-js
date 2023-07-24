@@ -14,8 +14,10 @@ import { FontAwesome5, Feather } from "@expo/vector-icons";
 const RegularScheduleForm = ({ days, setDays }) => {
   const [selectedDay, setSelectedDay] = useState(null);
 
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  const today = new Date();
+  today.setMinutes(0);
+  const [startTime, setStartTime] = useState(today);
+  const [endTime, setEndTime] = useState(today);
 
   const handleDayPress = (objKey) => {
     const dayInfo = { ...days[objKey] };

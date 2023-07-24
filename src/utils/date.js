@@ -28,9 +28,10 @@ export const getTotalDays = (selectedMonth, selectedYear) => {
 
   // days = [
   //     {
-  //         state,
-  //         num,
-  //         date
+  //         state: prev, weekday, sat, sun, next,
+  //         num: 날짜(일),
+  //         date: 날짜,
+  //         day: 1 ~ 7
   //     }
   // ]
   const days = [];
@@ -38,10 +39,18 @@ export const getTotalDays = (selectedMonth, selectedYear) => {
 
   // prev month
   for (let i = prevLastDay; i < 6 && i >= 0; i--) {
+    const date = new Date(
+      prev.getFullYear(),
+      prev.getMonth(),
+      prevLastDate - i
+    );
+    const day = date.getDay() + 1;
+
     days.push({
       state: CalendarStates.prev,
       num: prevLastDate - i,
-      date: new Date(prev.getFullYear(), prev.getMonth(), prevLastDate - i),
+      date,
+      day,
     });
     index++;
   }
@@ -54,20 +63,26 @@ export const getTotalDays = (selectedMonth, selectedYear) => {
         : day === 6
         ? CalendarStates.sat
         : CalendarStates.weekday;
+    const date = new Date(curr.getFullYear(), curr.getMonth(), i);
 
     days.push({
       state,
       num: i,
-      date: new Date(curr.getFullYear(), curr.getMonth(), i),
+      date,
+      day: date.getDay() + 1,
     });
     index++;
   }
   // next month
   for (let i = 1; i < 7 - currLastDay; i++) {
+    const date = new Date(next.getFullYear(), next.getMonth(), i);
+    const day = date.getDay() + 1;
+
     days.push({
       state: CalendarStates.next,
       num: i,
-      date: new Date(next.getFullYear(), next.getMonth(), i),
+      date,
+      day,
     });
   }
 

@@ -24,7 +24,7 @@ const HomeScreen = () => {
         <TodayClassView>
           <TodayClassText>오늘 수업</TodayClassText>
 
-          <ClassList />
+          {/* <ClassList /> */}
         </TodayClassView>
       </MainLayout>
 
