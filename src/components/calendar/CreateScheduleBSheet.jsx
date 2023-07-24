@@ -16,6 +16,7 @@ const dummyList = ["영어 과외 수업", "피아노 수업"];
 
 const CreateScheduleBSheet = ({ rbRef, date, edit }) => {
   const today = new Date();
+  today.setMinutes(0);
   const [startTime, setStartTime] = useState(today);
   const [endTime, setEndTime] = useState(today);
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 
 import color from "../../common/color";
@@ -9,7 +9,8 @@ import CalendarHeader from "./CalendarHeader";
 import CalendarBody from "./CalendarBody";
 import CalendarDatePicker from "./CalendarDatePicker";
 
-const Calendar = () => {
+const Calendar = ({ onChangeDate = () => {}, dayTimeList }) => {
+  console.log("Calendar dayTimeList: ", dayTimeList);
   const today = new Date();
 
   const year = today.getFullYear();
@@ -72,6 +73,10 @@ const Calendar = () => {
     setSelectedYear(year);
   };
 
+  useEffect(() => {
+    onChangeDate(selectedDate);
+  }, [selectedDate]);
+
   return (
     <Container>
       {/* 년 & 월 보여주는 캘린더 헤더 */}
@@ -106,6 +111,7 @@ const Calendar = () => {
 
       {/* 캘린더 바디 */}
       <CalendarBody
+        dayTimeList={dayTimeList}
         selectedDate={selectedDate}
         selectedMonth={selectedMonth}
         selectedYear={selectedYear}

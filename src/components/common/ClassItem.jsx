@@ -17,7 +17,7 @@ const ClassItem = ({ classItem }) => {
   const navigation = useNavigation();
 
   const handlePressClassItem = () => {
-    navigation.navigate("ClassInfoScreen");
+    navigation.navigate("ClassInfoScreen", { tutoringId });
   };
 
   return (

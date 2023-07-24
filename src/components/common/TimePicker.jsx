@@ -70,6 +70,7 @@ const TimePicker = ({ startTime, setStartTime, endTime, setEndTime }) => {
             onChange={onChange}
             style={{ width: "90%", alignSelf: "center" }} // IOS only
             themeVariant="light"
+            minuteInterval={5}
           />
         )}
       </Container>

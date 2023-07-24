@@ -13,6 +13,7 @@ import SelectTag from "../inputs/SelectTag";
 
 const ScheduleDetailBSheet = ({ rbRef, schedule, date, edit }) => {
   const today = new Date();
+  today.setMinutes(0);
   const [startTime, setStartTime] = useState(today);
   const [endTime, setEndTime] = useState(today);
 
