@@ -7,11 +7,12 @@ import CircleIconButton from "../../components/common/CircleIconButton";
 import ClassList from "../../components/common/ClassList";
 
 import client from "../../config/axios";
+import Loading from "../../components/common/Loading";
 
 const ClassListScreen = () => {
   // 학생 => [{ tutoringId, subject, tutorName }]
   // 선생 => [{ tutoringId, subject, tuteeName }]
-  const [classList, setClassList] = useState([]);
+  const [classList, setClassList] = useState(null);
 
   const getClassList = async () => {
     try {
@@ -33,9 +34,13 @@ const ClassListScreen = () => {
   return (
     <>
       <MainLayout headerText={"수업 목록"} headerType={"basic"}>
-        <ClassListWrapper>
-          <ClassList classList={classList} />
-        </ClassListWrapper>
+        {!classList ? (
+          <Loading />
+        ) : (
+          <ClassListWrapper>
+            <ClassList classList={classList} />
+          </ClassListWrapper>
+        )}
       </MainLayout>
 
       <CircleIconButton name="user-plus" size={17} />
