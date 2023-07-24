@@ -6,10 +6,10 @@ import tags from "../../common/tags";
 
 import BottomSheet from "../common/BottomSheet";
 import CalendarBSheetHeader from "./CalendarBSheetHeader";
-import CalendarUserInfo from "./CalendarUserInfo";
 import LeftBarContainer from "../common/LeftBarContainer";
 import TimePicker from "../common/TimePicker";
 import SelectTag from "../inputs/SelectTag";
+import UserInfo from "../common/UserInfo";
 
 const ScheduleDetailBSheet = ({ rbRef, schedule, date, edit }) => {
   const today = new Date();
@@ -35,11 +35,11 @@ const ScheduleDetailBSheet = ({ rbRef, schedule, date, edit }) => {
         <CalendarBSheetHeader date={date} edit={edit} />
 
         <LeftBarContainer label="Tutor">
-          <CalendarUserInfo />
+          <UserInfo />
         </LeftBarContainer>
 
         <LeftBarContainer label="Tutee">
-          <CalendarUserInfo />
+          <UserInfo />
         </LeftBarContainer>
 
         <TimePicker

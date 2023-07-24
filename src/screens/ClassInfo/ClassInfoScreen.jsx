@@ -14,6 +14,7 @@ import SubLayout from "../../components/common/SubLayout";
 import ClassInfo from "../../components/classInfo/ClassInfo";
 import client from "../../config/axios";
 import Loading from "../../components/common/Loading";
+import ClassDetailInfo from "../../components/classInfo/ClassDetailInfo";
 
 const ClassInfoScreen = () => {
   const navigation = useNavigation();
@@ -63,13 +64,14 @@ const ClassInfoScreen = () => {
         <Loading />
       ) : (
         <>
-          <SubLayout>
+          {/* <SubLayout>
             <InfroWrapper>
               <TeacherInfo />
               <StudentInfo />
               <ClassInfo />
             </InfroWrapper>
-          </SubLayout>
+          </SubLayout> */}
+          <ClassDetailInfo classInfo={classInfo} />
 
           <Calendar
             scheduleList={classInfo?.scheduleList}
