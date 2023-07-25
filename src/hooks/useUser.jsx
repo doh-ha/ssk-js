@@ -20,19 +20,18 @@ const useUser = () => {
           role = ret.data.role;
           name = ret.data.name;
           userId = ret.data.userId;
-
           await storeData("role", role);
           await storeData("name", name);
           await storeData("userId", userId);
-        } else if (ret.status == 400) {
-          console.log("useUser: getUserData bad request");
         }
       } catch (err) {
         console.log(`useUser error in ${Platform.OS}: `, err);
         if (err.response && err.response.status) {
-          // console.log(err.response.status);
-          if (err.response.status == 401) {
+          const status = err.response.status;
+          if (status == 401) {
             navigation.navigate("LoginScreen");
+          } else if (status == 400) {
+            console.log("useUser: getUserData bad request");
           }
         }
       }

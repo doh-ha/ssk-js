@@ -57,7 +57,7 @@ const CalendarBody = ({
 
     setTotalDays(days);
     setSelectedItem(days[0]);
-  }, [scheduleList]);
+  }, [scheduleList, selectedMonth, selectedYear]);
 
   // 날짜 타일 렌더링 아이템
   const renderItem = ({ item }) => {

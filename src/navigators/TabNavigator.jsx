@@ -26,6 +26,7 @@ const TabNavigator = () => {
           shadowOpacity: 0.2,
           elevation: 3,
         },
+        tabBarHideOnKeyboard: true,
       }}
     >
       <TabBar.Screen

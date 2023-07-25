@@ -51,7 +51,7 @@ const ClassListScreen = () => {
         )}
       </MainLayout>
 
-      <CircleIconButton name="user-plus" size={17} />
+      <CircleIconButton name="plus" />
     </>
   );
 };

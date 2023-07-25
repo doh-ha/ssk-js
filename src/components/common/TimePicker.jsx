@@ -9,35 +9,55 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { dateToTimeFormat } from "../../utils/date";
 import LeftBarContainer from "./LeftBarContainer";
 
-const TimePicker = ({ startTime, setStartTime, endTime, setEndTime }) => {
+const TimePicker = ({
+  startTime,
+  setStartTime,
+  endTime,
+  setEndTime,
+  clickable = true,
+}) => {
   const [pressStartTime, setPressStartTime] = useState(false);
   const [pressEndTime, setPressEndTime] = useState(false);
 
   const onChange = (e, _date) => {
+    if (Platform.OS === "android") {
+      if (pressStartTime) {
+        setPressStartTime(false);
+      } else if (pressEndTime) {
+        setPressEndTime(false);
+      }
+    }
+
     if (e.type === "set") {
       if (pressStartTime) {
         setStartTime(_date);
+
+        if (_date > endTime) {
+          setEndTime(_date);
+        }
       } else if (pressEndTime) {
         setEndTime(_date);
+
+        if (_date < startTime) {
+          setStartTime(_date);
+        }
       }
-    }
-    if (Platform.OS === "android") {
-      setPressStartTime(false);
-      setPressEndTime(false);
     }
   };
 
   const handlePressTime = (isStartTime) => {
-    if (isStartTime) {
-      if (pressEndTime) {
-        setPressEndTime(false);
+    if (clickable) {
+      if (isStartTime) {
+        if (pressEndTime) {
+          setPressEndTime(false);
+        }
+        setPressStartTime(!pressStartTime);
+      } else {
+        if (pressStartTime) {
+          setPressStartTime(false);
+        }
+        setPressEndTime(!pressEndTime);
       }
-      setPressStartTime(!pressStartTime);
-    } else {
-      if (pressStartTime) {
-        setPressStartTime(false);
-      }
-      setPressEndTime(!pressEndTime);
     }
   };
 
@@ -50,7 +70,9 @@ const TimePicker = ({ startTime, setStartTime, endTime, setEndTime }) => {
             width="50%"
             onPress={handlePressTime.bind(this, true)}
           >
-            <Time selected={pressStartTime}>{dateToTimeFormat(startTime)}</Time>
+            <Time selected={clickable ? pressStartTime : true}>
+              {dateToTimeFormat(startTime)}
+            </Time>
           </LeftBarContainer>
 
           <LeftBarContainer
@@ -58,7 +80,9 @@ const TimePicker = ({ startTime, setStartTime, endTime, setEndTime }) => {
             width="50%"
             onPress={handlePressTime.bind(this, false)}
           >
-            <Time selected={pressEndTime}>{dateToTimeFormat(endTime)}</Time>
+            <Time selected={clickable ? pressEndTime : true}>
+              {dateToTimeFormat(endTime)}
+            </Time>
           </LeftBarContainer>
         </TimeWrapper>
 
@@ -71,6 +95,8 @@ const TimePicker = ({ startTime, setStartTime, endTime, setEndTime }) => {
             style={{ width: "90%", alignSelf: "center" }} // IOS only
             themeVariant="light"
             minuteInterval={5}
+            positiveButton={{ label: "선택", textColor: color.COLOR_MAIN }} // Android Only
+            negativeButton={{ label: "취소", textColor: color.COLOR_GRAY_TEXT }} // Android Only
           />
         )}
       </Container>
