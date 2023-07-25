@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components/native";
 import color from "../../common/color";
+
 import ClassUserInfo from "./ClassUserInfo";
+
 import { Day } from "../../utils/date";
+import InviteCodeModal from "../common/InviteCodeModal";
 
 const ClassDetailInfo = ({ classInfo }) => {
   const { dayTimeList, startDate, subject, tuteeName, tutorName, tutoringId } =
     classInfo;
+
+  // 초대 코드 모달
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <>
       <Container>
@@ -31,7 +38,10 @@ const ClassDetailInfo = ({ classInfo }) => {
           </InfoContainer>
         ) : (
           <InfoContainer style={{ marginBottom: 10 }}>
-            <InviteButton activeOpacity={0.5}>
+            <InviteButton
+              onPress={() => setModalVisible(true)}
+              activeOpacity={0.5}
+            >
               <InviteText>학생 초대</InviteText>
             </InviteButton>
           </InfoContainer>
@@ -66,6 +76,13 @@ const ClassDetailInfo = ({ classInfo }) => {
           ))}
         </DayTimeContainer>
       </Container>
+
+      {/* 학생 초대 코드 모달 */}
+      <InviteCodeModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        tutoringId={tutoringId}
+      />
     </>
   );
 };

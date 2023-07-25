@@ -4,6 +4,8 @@ import styled from "styled-components/native";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 
+import { Modal } from "react-native";
+
 import MainLayout from "../../components/common/MainLayout";
 import Calendar from "../../components/calendar/Calendar";
 import HwNotePreview from "../../components/homeworkNote/HwNotePreview";

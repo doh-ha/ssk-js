@@ -6,7 +6,7 @@ const useIsTutor = () => {
   const [isTutor, setIsTutor] = useState(false);
 
   useEffect(() => {
-    if (user) {
+    if (user && user.role && user.name && user.userId) {
       if (user.role === "TUTOR") {
         setIsTutor(true);
       } else {

@@ -11,6 +11,8 @@ import TimePicker from "../common/TimePicker";
 import SelectTag from "../inputs/SelectTag";
 import UserInfo from "../common/UserInfo";
 
+import useIsTutor from "../../hooks/useIsTutor";
+
 const ScheduleDetailBSheet = ({ rbRef, schedule, date, edit }) => {
   const today = new Date();
   today.setMinutes(0);
@@ -47,16 +49,23 @@ const ScheduleDetailBSheet = ({ rbRef, schedule, date, edit }) => {
           setStartTime={setStartTime}
           endTime={endTime}
           setEndTime={setEndTime}
+          clickable={edit}
         />
 
         <LeftBarContainer label="Description">
-          <DescriptionInput
-            multiline={true} //여러줄 입력가능
-            textAlignVertical="top" //처음부터 시작 (기본값은 center)
-            placeholder="내용을 입력하세요."
-            value={description}
-            onChangeText={setDescription}
-          />
+          {edit ? (
+            <DescriptionInput
+              multiline={true} //여러줄 입력가능
+              textAlignVertical="top" //처음부터 시작 (기본값은 center)
+              placeholder="내용을 입력하세요."
+              value={description}
+              onChangeText={setDescription}
+            />
+          ) : (
+            <DescriptionText>
+              디스크립션디스크립션디스크립션디스크립션디스크립션디스크립션디스크립션
+            </DescriptionText>
+          )}
         </LeftBarContainer>
 
         <SelectTag tag={tag} setTag={setTag} />
@@ -75,4 +84,11 @@ const DescriptionInput = styled.TextInput`
   height: 150;
   border-radius: 5;
   padding: 7px;
+`;
+
+const DescriptionText = styled.Text`
+  // font-weight: bold;
+  font-size: 16;
+  padding-vertical: 5;
+  line-height: 24;
 `;

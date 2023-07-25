@@ -2,15 +2,20 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-import { getData } from "../../constants/asyncStorage";
+import { clearData, getData } from "../../constants/asyncStorage";
+
+import { Alert } from "react-native";
 
 import MainLayout from "../../components/common/MainLayout";
 import MyPageButton from "../../components/myPage/MyPageButton";
 import ConfirmModal from "../../components/common/ConfirmModal";
+import useUser from "../../hooks/useUser";
 
 const MyPageScreen = () => {
+  const user = useUser();
+
   const navigation = useNavigation();
-  const [nickName, setNickName] = useState("");
+  // const [nickName, setNickName] = useState("");
   const [isLeaveModalOpened, setIsLeaveModalOpened] = useState(false);
 
   // 버튼: 프로필 정보 화면으로 가기
@@ -41,6 +46,24 @@ const MyPageScreen = () => {
     }
   };
 
+  // 로그아웃
+  const handleLogout = () => {
+    Alert.alert("로그아웃", "로그아웃 하시겠습니까?", [
+      {
+        text: "취소",
+        onPress: () => {},
+        style: "cancel",
+      },
+      {
+        text: "확인",
+        onPress: async () => {
+          await clearData();
+          navigation.navigate("LoginScreen");
+        },
+      },
+    ]);
+  };
+
   // 회원 정보 불러오기
   const fetchUserInfo = async () => {
     try {
@@ -59,22 +82,22 @@ const MyPageScreen = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const userInfo = await fetchUserInfo();
-      console.log(userInfo);
-      setNickName(userInfo.name);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const userInfo = await fetchUserInfo();
+  //     console.log(userInfo);
+  //     setNickName(userInfo.name);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <>
       <MainLayout headerText={"마이 페이지"} headerType={"basic"}>
         <MyPageButton
           type="PROFILE"
-          nickname={nickName}
+          nickname={user?.name}
           handleButton={handleProfileButton}
         />
         <MyPageButton
@@ -82,7 +105,7 @@ const MyPageScreen = () => {
           handleButton={handleNotificationButton}
         />
         <MyPageButton type="AGREEMENT" />
-        <MyPageButton type="LOGOUT" />
+        <MyPageButton type="LOGOUT" handleButton={handleLogout} />
         <MyPageButton
           type="LEAVE"
           handleButton={() => setIsLeaveModalOpened(true)}
