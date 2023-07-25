@@ -20,6 +20,7 @@ const InviteCodeModal = ({ modalVisible, setModalVisible, tutoringId }) => {
       console.log(ret.status);
       if (ret.status == 200) {
         console.log(ret.data);
+        setInviteCode(ret.data.invitationCode);
       }
     } catch (err) {
       console.log("Invite code error: ", err);

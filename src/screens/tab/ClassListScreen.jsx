@@ -9,6 +9,7 @@ import ClassList from "../../components/common/ClassList";
 import client from "../../config/axios";
 import Loading from "../../components/common/Loading";
 import ErrorMessage from "../../components/common/ErrorMessage";
+import EmptyClassList from "../../components/common/EmptyClassList";
 
 const ClassListScreen = () => {
   // 학생 => [{ tutoringId, subject, tutorName }]
@@ -28,6 +29,14 @@ const ClassListScreen = () => {
       }
     } catch (err) {
       console.log("get class list error: ", err);
+      if (err.response && err.response.status) {
+        const status = err.response.status;
+
+        if (status == 404) {
+          console.log("Class list doesn't exist");
+          setClassList([]);
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -44,7 +53,11 @@ const ClassListScreen = () => {
           <Loading />
         ) : classList ? (
           <ClassListWrapper>
-            <ClassList classList={classList} />
+            {classList.length === 0 ? (
+              <EmptyClassList />
+            ) : (
+              <ClassList classList={classList} />
+            )}
           </ClassListWrapper>
         ) : (
           <ErrorMessage />

@@ -51,13 +51,23 @@ const CalendarBody = ({
     rbRef?.current?.open();
   };
 
-  useEffect(() => {
+  const setInitialStates = () => {
     const days = getTotalDays(selectedMonth, selectedYear, scheduleList);
     // console.log(days);
 
     setTotalDays(days);
     setSelectedItem(days[0]);
-  }, [scheduleList, selectedMonth, selectedYear]);
+  };
+
+  useEffect(() => {
+    if (!scheduleList) {
+      setInitialStates();
+    }
+  }, [selectedMonth, selectedYear]);
+
+  useEffect(() => {
+    setInitialStates();
+  }, [scheduleList]);
 
   // 날짜 타일 렌더링 아이템
   const renderItem = ({ item }) => {

@@ -3,25 +3,25 @@ import React from "react";
 import styled from "styled-components/native";
 import color from "../../common/color";
 
-const ErrorMessage = ({}) => {
+const EmptyClassList = () => {
   return (
     <Container>
-      <ErrText>Error: Something wrong</ErrText>
+      <Text>수업 목록이 없습니다.</Text>
     </Container>
   );
 };
 
-export default ErrorMessage;
+export default EmptyClassList;
 
 const Container = styled.View`
-  width: 100%;
-  height: 100%;
-  padding-vertical: 50;
+  //   background-color: orange;
   align-items: center;
   justify-content: center;
+  padding-vertical: 50;
 `;
 
-const ErrText = styled.Text`
+const Text = styled.Text`
   font-weight: bold;
-  font-size: 20;
+  font-size: 16;
+  color: ${color.COLOR_GRAY_TEXT};
 `;
