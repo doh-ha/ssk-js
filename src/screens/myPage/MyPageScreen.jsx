@@ -7,10 +7,13 @@ import { getData } from "../../constants/asyncStorage";
 import MainLayout from "../../components/common/MainLayout";
 import MyPageButton from "../../components/myPage/MyPageButton";
 import ConfirmModal from "../../components/common/ConfirmModal";
+import useUser from "../../hooks/useUser";
 
 const MyPageScreen = () => {
+  const user = useUser();
+
   const navigation = useNavigation();
-  const [nickName, setNickName] = useState("");
+  // const [nickName, setNickName] = useState("");
   const [isLeaveModalOpened, setIsLeaveModalOpened] = useState(false);
 
   // 버튼: 프로필 정보 화면으로 가기
@@ -59,22 +62,22 @@ const MyPageScreen = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const userInfo = await fetchUserInfo();
-      console.log(userInfo);
-      setNickName(userInfo.name);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const userInfo = await fetchUserInfo();
+  //     console.log(userInfo);
+  //     setNickName(userInfo.name);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <>
       <MainLayout headerText={"마이 페이지"} headerType={"basic"}>
         <MyPageButton
           type="PROFILE"
-          nickname={nickName}
+          nickname={user.name}
           handleButton={handleProfileButton}
         />
         <MyPageButton
