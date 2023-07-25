@@ -54,9 +54,11 @@ const InviteCodeModal = ({ modalVisible, setModalVisible, tutoringId }) => {
           {loading ? (
             <Loading size={50} padding={0} />
           ) : (
-            <InviteCode inviteCode={inviteCode}>
-              {inviteCode ? inviteCode : "초대 코드"}
-            </InviteCode>
+            <InviteCode
+              editable={false}
+              multiline={true}
+              value={inviteCode ? inviteCode : "초대 코드"}
+            />
           )}
         </InviteCodeWrapper>
 
@@ -89,9 +91,11 @@ const InviteCodeWrapper = styled.View`
   align-items: center;
 `;
 
-const InviteCode = styled.Text`
+const InviteCode = styled.TextInput`
+  //   background-color: orange;
+  width: 100%;
   text-align: center;
-  font-size: 22;
+  font-size: 24;
   font-weight: bold;
   color: ${({ inviteCode }) => (inviteCode ? "#000" : color.COLOR_GRAY_TEXT)};
 `;
