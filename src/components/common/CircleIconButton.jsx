@@ -10,11 +10,12 @@ const CircleIconButton = ({
   btnColor = color.COLOR_MAIN,
   name,
   onPress = () => {},
+  size = 20,
 }) => {
   return (
     <Container>
       <Button style={styles.button} btnColor={btnColor} onPress={onPress}>
-        <FontAwesome5 name={name} size={20} color={"#fff"} />
+        <FontAwesome5 name={name} size={size} color={"#fff"} />
       </Button>
     </Container>
   );

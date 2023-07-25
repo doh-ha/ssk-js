@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 
 import color from "../../common/color";
@@ -9,7 +9,12 @@ import CalendarHeader from "./CalendarHeader";
 import CalendarBody from "./CalendarBody";
 import CalendarDatePicker from "./CalendarDatePicker";
 
-const Calendar = () => {
+const Calendar = ({
+  onChangeDate = () => {},
+  onChangeYearMonth = () => {},
+  scheduleList,
+}) => {
+  // console.log("Calendar lists: ", { dayTimeList, scheduleList });
   const today = new Date();
 
   const year = today.getFullYear();
@@ -32,15 +37,21 @@ const Calendar = () => {
   // 월 이동
   // dir = -1: 이전달, 1: 다음달
   const handleMoveMonth = (dir) => {
+    let year = selectedYear;
+    let month = selectedMonth;
+
     if (selectedMonth === 1 && dir === -1) {
-      setSelectedMonth(12);
-      setSelectedYear(selectedYear - 1);
+      year -= 1;
+      month = 12;
     } else if (selectedMonth === 12 && dir === 1) {
-      setSelectedMonth(1);
-      setSelectedYear(selectedYear + 1);
+      year += 1;
+      month = 1;
     } else {
-      setSelectedMonth(selectedMonth + dir);
+      month += dir;
     }
+
+    setSelectedMonth(month);
+    setSelectedYear(year);
   };
 
   // 날짜 타일 클릭 시 실행되는 이벤트 함수
@@ -71,6 +82,14 @@ const Calendar = () => {
     setSelectedMonth(month);
     setSelectedYear(year);
   };
+
+  useEffect(() => {
+    onChangeDate(selectedDate);
+  }, [selectedDate]);
+
+  useEffect(() => {
+    onChangeYearMonth(selectedYear, selectedMonth);
+  }, [selectedMonth, selectedYear]);
 
   return (
     <Container>
@@ -106,6 +125,7 @@ const Calendar = () => {
 
       {/* 캘린더 바디 */}
       <CalendarBody
+        scheduleList={scheduleList}
         selectedDate={selectedDate}
         selectedMonth={selectedMonth}
         selectedYear={selectedYear}

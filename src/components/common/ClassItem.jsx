@@ -7,16 +7,39 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { StyleSheet, Platform } from "react-native";
 
 import ProfileImage from "./ProfileImage";
+import { useNavigation } from "@react-navigation/native";
+import useIsTutor from "../../hooks/useIsTutor";
 
-const ClassItem = () => {
+const ClassItem = ({ classItem }) => {
+  const isTutor = useIsTutor();
+  const { profileImageUrl, subject, tutoringId, tuteeName, tutorName } =
+    classItem;
+
+  const navigation = useNavigation();
+
+  const handlePressClassItem = () => {
+    navigation.navigate("ClassInfoScreen", { tutoringId });
+  };
+
   return (
-    <Container style={styles.container}>
+    <Container
+      activeOpacity={0.5}
+      style={styles.container}
+      onPress={handlePressClassItem}
+    >
       <UserInfoView>
-        <ProfileImage />
+        <ProfileImage image={profileImageUrl} />
 
         <UserTextView>
-          <UserBigText>영어</UserBigText>
-          <UserSmallText>박영어 선생님</UserSmallText>
+          <UserBigText>{subject}</UserBigText>
+
+          <UserSmallText>
+            {!isTutor
+              ? tutorName
+              : tuteeName
+              ? tuteeName
+              : "학생이 초대되지 않았습니다."}
+          </UserSmallText>
         </UserTextView>
       </UserInfoView>
 
@@ -46,7 +69,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Container = styled.Pressable`
+const Container = styled.TouchableOpacity`
   background-color: ${color.COLOR_WHITE_BACKGROUND};
   width: 95%;
   margin-vertical: 4;
@@ -56,7 +79,7 @@ const Container = styled.Pressable`
   align-self: center;
   justify-content: space-between;
   padding-horizontal: 18;
-  padding-vertical: 10;
+  padding-vertical: 12;
 `;
 
 const UserInfoView = styled.View`
@@ -76,5 +99,5 @@ const UserBigText = styled.Text`
 
 const UserSmallText = styled.Text`
   color: ${color.COLOR_GRAY_TEXT};
-  margin-top: 3;
+  margin-top: 5;
 `;

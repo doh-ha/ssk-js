@@ -32,11 +32,12 @@ const CalendarBody = ({
   selectedMonth,
   selectedYear,
   handlePressDate,
+  scheduleList,
 }) => {
   const today = new Date();
   // 현재 월의 모든 날짜 보여주기 위한 배열 state
   // 이전 달의 마지막 n 개의 날짜 + 현재 달 날짜 + 다음 달 처음 m 개의 날짜
-  // 각 날짜는 { state, num, date } 로 이루어져 있음
+  // 각 날짜는 { state, num, date, day, mark } 로 이루어져 있음
   const [totalDays, setTotalDays] = useState([]);
 
   // 바텀시트 ref
@@ -50,11 +51,23 @@ const CalendarBody = ({
     rbRef?.current?.open();
   };
 
-  useEffect(() => {
-    const days = getTotalDays(selectedMonth, selectedYear);
+  const setInitialStates = () => {
+    const days = getTotalDays(selectedMonth, selectedYear, scheduleList);
+    // console.log(days);
+
     setTotalDays(days);
     setSelectedItem(days[0]);
+  };
+
+  useEffect(() => {
+    if (!scheduleList) {
+      setInitialStates();
+    }
   }, [selectedMonth, selectedYear]);
+
+  useEffect(() => {
+    setInitialStates();
+  }, [scheduleList]);
 
   // 날짜 타일 렌더링 아이템
   const renderItem = ({ item }) => {
@@ -66,9 +79,12 @@ const CalendarBody = ({
         onPress={onPress.bind(this, item)}
       >
         <CalendarDayText state={item.state}>{item.num}</CalendarDayText>
-        <TagView>
-          <Tag />
-        </TagView>
+
+        {item.mark ? (
+          <TagView>
+            <Tag />
+          </TagView>
+        ) : null}
       </CalendarDay>
     );
   };
