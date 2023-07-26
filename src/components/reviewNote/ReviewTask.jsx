@@ -11,7 +11,7 @@ import { TouchableOpacity, TextInput, StyleSheet, View, ScrollView, Text } from 
 import NoteTop from "./NoteTop";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-const ReviewListPage = () => {
+const ReviewTask = () => {
   const initialState = { id: 0, content: "", completed: false };
 
   const [task, setTask] = useState([]);
@@ -91,26 +91,29 @@ const ReviewListPage = () => {
   );
   return (
     <KeyboardAvoidingLayout>
-      <MainLayout headerText={"복습 노트"} headerType={"back"}>
-        <InnerWrapper>
-          <ReviewTask />
-        </InnerWrapper>
-        <InputWrapper>
-          <Container>
-            <TextInput style={styles.inputField} onChangeText={(text) => setTask(text)} placeholder={"Write a task"} value={newTask.content} />
-          </Container>
-          <TouchableOpacity onPress={addTask}>
-            <View style={styles.button}>
-              <Ionicons name="arrow-up-outline" size={30} color="#0C9BFB" onPress={addTask} />
-            </View>
-          </TouchableOpacity>
-        </InputWrapper>
-      </MainLayout>
+      <ContinuingReview />
+      <ScrollView>
+        <View style={{ height: 250 }}>{task.map((item) => (!item.completed ? displayTask(item) : null))}</View>
+      </ScrollView>
+      <FinishedReview />
+      <ScrollView>
+        <View style={{ height: 250 }}>{task.map((item) => (item.completed ? displayTask(item) : null))}</View>
+      </ScrollView>
+      <InputWrapper>
+        <Container>
+          <TextInput style={styles.inputField} onChangeText={(text) => setTask(text)} placeholder={"Write a task"} value={newTask.content} />
+        </Container>
+        <TouchableOpacity onPress={addTask}>
+          <View style={styles.button}>
+            <Ionicons name="arrow-up-outline" size={30} color="#0C9BFB" onPress={addTask} />
+          </View>
+        </TouchableOpacity>
+      </InputWrapper>
     </KeyboardAvoidingLayout>
   );
 };
 
-export default ReviewListPage;
+export default ReviewTask;
 
 const InnerWrapper = styled.View`
   margin-horizontal: 20;

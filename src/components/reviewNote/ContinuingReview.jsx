@@ -28,8 +28,6 @@ const ContinuingReview = () => {
         <OpenedView>
           <Detail sizes={sizes}>
             <Line />
-            <ReviewItem contentText={"확률과 통계"} tagColor="#FEA4FA" checked={false} />
-            <ReviewItem contentText={"지수와 로그"} tagColor="#FDE619" />
           </Detail>
         </OpenedView>
       </ContinuingContainer>
